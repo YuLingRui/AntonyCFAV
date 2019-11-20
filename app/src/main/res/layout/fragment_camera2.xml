@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.android.camera2basic.AutoFitTextureView
+    <com.antony.cfav.view.AutoFitTextureView
         android:id="@+id/texture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,8 +14,8 @@
         android:id="@+id/control"
         android:layout_width="match_parent"
         android:layout_height="112dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:background="@color/control_background">
 
         <Button
@@ -27,11 +27,11 @@
 
         <ImageButton
             android:id="@+id/info"
-            android:contentDescription="@string/description_info"
             style="@android:style/Widget.Material.Light.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
+            android:contentDescription="@string/description_info"
             android:padding="20dp"
             android:src="@drawable/ic_action_info" />
 

@@ -71,47 +71,25 @@ public class Camera2Fragment extends Fragment implements View.OnClickListener, A
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
-
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
-
-    /**
-     * 相机状态:显示相机预览。
-     */
+    /*相机状态:显示相机预览*/
     private static final int STATE_PREVIEW = 0;
-
-    /**
-     * 相机状态:等待对焦锁定。
-     */
+    /*相机状态:等待对焦锁定*/
     private static final int STATE_WAITING_LOCK = 1;
-
-    /**
-     * 相机状态:等待曝光为预捕获状态。
-     */
+    /*相机状态:等待曝光为预捕获状态。*/
     private static final int STATE_WAITING_PRECAPTURE = 2;
-
-    /**
-     * 相机状态:等待曝光状态不是预捕获。
-     */
+    /*相机状态:等待曝光状态不是预捕获*/
     private static final int STATE_WAITING_NON_PRECAPTURE = 3;
-
-    /**
-     * 相机状态:拍照。
-     */
+    /*相机状态:拍照*/
     private static final int STATE_PICTURE_TAKEN = 4;
-
-    /**
-     * 由Camera2 API保证的最大预览宽度
-     */
+    /*由Camera2 API保证的最大预览宽度*/
     private static final int MAX_PREVIEW_WIDTH = 1920;
-
-    /**
-     * Camera2 API保证的最大预览高度
-     */
+    /*Camera2 API保证的最大预览高度*/
     private static final int MAX_PREVIEW_HEIGHT = 1080;
     //当前的{@link CameraDevice}的ID。
     private String mCameraId;
@@ -139,16 +117,10 @@ public class Camera2Fragment extends Fragment implements View.OnClickListener, A
     private CaptureRequest.Builder mPreviewRequestBuilder;
     //由{@link #mPreviewRequestBuilder}生成{@link CaptureRequest}
     private CaptureRequest mPreviewRequest;
-
     //用于拍照的相机状态的当前状态。
     private int mState = STATE_PREVIEW;
     //一个{@link  Semaphore[计数信号量]} 在关闭摄像头之前防止应用程序退出。
     private Semaphore mCameraOpenCloseLock = new Semaphore(1);
-
-
-    public Camera2Fragment() {
-        // Required empty public constructor
-    }
 
     public static Camera2Fragment newInstance() {
         return new Camera2Fragment();
@@ -214,7 +186,6 @@ public class Camera2Fragment extends Fragment implements View.OnClickListener, A
     public void onResume() {
         super.onResume();
         startBackgroundThread();
-
         // When the screen is turned off and turned back on, the SurfaceTexture is already
         // available, and "onSurfaceTextureAvailable" will not be called. In that case, we can open
         // a camera and start preview from here (otherwise, we wait until the surface is ready in

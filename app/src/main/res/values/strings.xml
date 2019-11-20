@@ -13,12 +13,7 @@
     <string name="cancel">Cancel</string>
     <string name="intro_message">
         <![CDATA[
-
-
-            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
-            you can display camera preview and take pictures.
-
-
+            这个示例演示了Camera2 API的基本用法。请查看源代码以了解如何实现,您可以显示相机预览和拍照。
         ]]>
     </string>
 </resources>
