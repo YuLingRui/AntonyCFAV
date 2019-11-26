@@ -12,7 +12,6 @@ import com.antony.cfav.activity.audio.AudioHandleActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
