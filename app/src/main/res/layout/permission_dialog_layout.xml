@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--虽然layout根节点设置了宽高为match_parent，但是最终显示的宽高都非常小，原因是AlertDialog默认会把根容器的宽高认为是wrap_content-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/alertdialogcomfirm_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/permission_dialog_bg"
+    android:layout_margin="@dimen/dp_30"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <!-- 提示 -->
+    <TextView
+        android:id="@+id/permission_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/permission_dialog_title"
+        android:textColor="@color/permission_dialog_title_color"
+        android:textSize="@dimen/sp_22"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_15"/>
+
+    <!-- 内容 -->
+    <TextView
+        android:id="@+id/permission_dialog_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/permission_dialog_message"
+        android:textColor="@color/permission_dialog_message_color"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginBottom="@dimen/dp_15"
+        />
+
+    <!-- 权限列表样式 -->
+    <ScrollView
+        android:id="@+id/permission_dialog_list_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_15"
+        android:scrollbars="none">
+        <LinearLayout
+            android:id="@+id/layout_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 确定按钮 -->
+    <TextView
+        android:id="@+id/dialog_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/permission_dialog_one_btn_bg"
+        android:gravity="center"
+        android:text="好的"
+        android:textColor="@color/permission_dialog_btn_text_color"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_8"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:focusable="true"
+        android:clickable="true"
+        />
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.antony.cfav.fragment;
+package com.antony.cfav.fragment.camera;
 
 import android.Manifest;
 import android.app.Activity;
@@ -28,7 +28,6 @@ import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -62,7 +61,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Google camera2 范例
+ * Google 提供的 camera2 范例
  */
 public class GoogleCamera2BasicFragment extends Fragment implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
     private static final String TAG = "Camera2BasicFragment";
@@ -154,16 +153,20 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
             openCamera(width, height);
         }
+
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
             configureTransform(width, height);
         }
+
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
             return true;
         }
+
         @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture texture) {}
+        public void onSurfaceTextureUpdated(SurfaceTexture texture) {
+        }
 
     };
 
@@ -398,6 +401,7 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
     /**
      * 配置必要的{@link android.graphics.Matrix}转换为“mTextureView”。
      * 这个方法应该在 "setupcameraoutput()" 中确定相机预览大小并确定 'mTextureView' 的大小后调用。
+     *
      * @param viewWidth  mTextureView 的宽度
      * @param viewHeight mTextureView 的高度
      */
@@ -428,7 +432,7 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
     private final CameraDevice.StateCallback mStateCallback = new CameraDevice.StateCallback() {
 
         @Override
-        public void onOpened(@NonNull CameraDevice cameraDevice) {
+        public void onOpened(CameraDevice cameraDevice) {
             // 在打开摄像机时调用此方法。我们在这里开始相机预览。
             mCameraOpenCloseLock.release();
             mCameraDevice = cameraDevice;
@@ -436,14 +440,14 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
         }
 
         @Override
-        public void onDisconnected(@NonNull CameraDevice cameraDevice) {
+        public void onDisconnected(CameraDevice cameraDevice) {
             mCameraOpenCloseLock.release();
             cameraDevice.close();
             mCameraDevice = null;
         }
 
         @Override
-        public void onError(@NonNull CameraDevice cameraDevice, int error) {
+        public void onError(CameraDevice cameraDevice, int error) {
             mCameraOpenCloseLock.release();
             cameraDevice.close();
             mCameraDevice = null;
@@ -476,7 +480,7 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
                     new CameraCaptureSession.StateCallback() {
 
                         @Override
-                        public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
+                        public void onConfigured(CameraCaptureSession cameraCaptureSession) {
                             // The camera is already closed
                             if (null == mCameraDevice) {
                                 return;
@@ -502,7 +506,7 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
 
                         @Override
                         public void onConfigureFailed(
-                                @NonNull CameraCaptureSession cameraCaptureSession) {
+                                CameraCaptureSession cameraCaptureSession) {
                             showToast("Failed");
                         }
                     }, null
@@ -559,16 +563,16 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
         }
 
         @Override
-        public void onCaptureProgressed(@NonNull CameraCaptureSession session,
-                                        @NonNull CaptureRequest request,
-                                        @NonNull CaptureResult partialResult) {
+        public void onCaptureProgressed(CameraCaptureSession session,
+                                        CaptureRequest request,
+                                        CaptureResult partialResult) {
             process(partialResult);
         }
 
         @Override
-        public void onCaptureCompleted(@NonNull CameraCaptureSession session,
-                                       @NonNull CaptureRequest request,
-                                       @NonNull TotalCaptureResult result) {
+        public void onCaptureCompleted(CameraCaptureSession session,
+                                       CaptureRequest request,
+                                       TotalCaptureResult result) {
             process(result);
         }
 
@@ -592,9 +596,9 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, getOrientation(rotation));
             CameraCaptureSession.CaptureCallback CaptureCallback = new CameraCaptureSession.CaptureCallback() {
                 @Override
-                public void onCaptureCompleted(@NonNull CameraCaptureSession session,
-                                               @NonNull CaptureRequest request,
-                                               @NonNull TotalCaptureResult result) {
+                public void onCaptureCompleted(CameraCaptureSession session,
+                                               CaptureRequest request,
+                                               TotalCaptureResult result) {
                     showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
                     unlockFocus();
@@ -691,9 +695,10 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
             requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         }
     }
+
     //权限反馈
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 ErrorDialog.newInstance(getString(R.string.request_permission))
@@ -707,6 +712,7 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
 
     /**
      * 选择最佳规模[Size]
+     *
      * @param choices           摄像机支持的输出类的大小列表
      * @param textureViewWidth  纹理视图相对于传感器坐标的宽度
      * @param textureViewHeight 纹理视图相对于传感器坐标的高度
@@ -769,7 +775,8 @@ public class GoogleCamera2BasicFragment extends Fragment implements View.OnClick
         if (activity != null) {
             activity.runOnUiThread(new Runnable() {
                 @Override
-                public void run() { Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+                public void run() {
+                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="picture">Picture</string>
     <string name="description_info">Info</string>
-    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="request_permission">工程需要权限许可！</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
     <!-- Preference framework strings. -->
     <string name="ok">OK</string>
@@ -16,4 +16,80 @@
             这个示例演示了Camera2 API的基本用法。请查看源代码以了解如何实现,您可以显示相机预览和拍照。
         ]]>
     </string>
+    <string name="title_activity_base">BaseActivity</string>
+
+    <!-- ==================权限申请对话框（alertdialog）================== -->
+    <string name="permission_dialog_title">权限申请</string>
+    <string name="permission_dialog_message">为了您能正常使用，需要以下权限</string>
+
+    <!-- ==================音视频相关================== -->
+    <string name="audio_transform">音频转码</string>
+    <string name="audio_cut">音频剪切</string>
+    <string name="audio_concat">音频合并</string>
+    <string name="audio_mix">音频混合</string>
+    <string name="audio_play">音频解码AudioTrack播放</string>
+    <string name="audio_opensl">音频解码OpenSL播放</string>
+    <string name="audio_encode">音频编码</string>
+    <string name="pcm_concat">PCM合并</string>
+
+    <string name="audio_handle">音频处理</string>
+    <string name="media_handle">音视频处理</string>
+    <string name="video_handle">视频处理</string>
+    <string name="video_push">本地推流直播</string>
+    <string name="video_live">实时推流直播</string>
+
+    <string name="media_mux">音视频合成</string>
+    <string name="media_extra_audio">提取音频</string>
+    <string name="media_extract_video">提取视频</string>
+    <string name="media_play">音视频播放</string>
+
+    <string name="video_cut">视频剪切</string>
+    <string name="video_concat">视频拼接</string>
+    <string name="video_water_mark">视频水印</string>
+    <string name="video_to_gif">视频转Gif</string>
+    <string name="video_transform">视频转码</string>
+    <string name="video_screen_shot">视频截图</string>
+    <string name="video_screen_record">屏幕录制</string>
+    <string name="video_from_photo">图片合成视频</string>
+    <string name="video_extract_frame">视频抽帧</string>
+    <string name="video_part_zoom">视频局部放大</string>
+    <string name="video_play">视频播放</string>
+    <string name="video_filter">滤镜特效</string>
+    <string name="video_slow">慢放</string>
+    <string name="video_fast">快进</string>
+    <string name="video_multi">画面拼接</string>
+    <string name="video_reverse">视频倒播</string>
+    <string name="video_denoise">视频降噪</string>
+    <string name="video_image">视频转图片</string>
+    <string name="video_pip">视频画中画</string>
+    <string name="video_preview">播放预览</string>
+
+    <string name="swap">切换</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+    <string name="mute">静音</string>
+    <string name="sound">声音</string>
+    <string name="sound_open">声音开</string>
+    <string name="sound_close">声音关</string>
+
+    <string name="video_sketch">素描</string>
+    <string name="video_hue">hue</string>
+    <string name="video_lut">lut</string>
+    <string name="video_edge">边缘</string>
+    <string name="video_blur">模糊</string>
+    <string name="video_grid">九宫格</string>
+    <string name="video_rotate">旋转</string>
+    <string name="video_flip">翻转</string>
+    <string name="video_box">矩形</string>
+    <string name="video_flash">闪烁</string>
+    <string name="video_balance">色彩平衡</string>
+    <string name="video_sharp">锐化</string>
+
+    <string name="select_file">选择文件</string>
+    <string name="please_select">请选择正确文件</string>
+    <string name="file_not_found">文件不存在</string>
+    <string name="please_click_select">请点击右上角菜单选择文件</string>
+    <string name="wrong_audio_format">非音频文件</string>
+    <string name="wrong_video_format">非视频文件</string>
+    <string name="converting_video">正在反转视频&#8230;</string>
 </resources>
