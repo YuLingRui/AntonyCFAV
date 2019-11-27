@@ -14,6 +14,9 @@ import com.antony.cfav.utils.file.FileUtil;
 
 import java.io.File;
 
+/**
+ * 音频相关操作页面
+ */
 public class AudioHandleActivity extends BaseActivity implements View.OnClickListener {
     // 你的答案.mp3
     private String song_path = Environment.getExternalStorageDirectory() + File.separator + "YourAnswer.mp3";

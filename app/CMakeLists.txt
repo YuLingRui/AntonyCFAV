@@ -4,7 +4,9 @@ cmake_minimum_required(VERSION 3.4.1)
 
 add_library(media-handle
         SHARED
-        src/main/cpp/audio_player.c)
+        src/main/cpp/audio_player.c
+        src/main/cpp/ffmpeg_jni_define.h
+        src/main/cpp/audio_lame.c)
 
 add_library(ffmpeg
         SHARED
