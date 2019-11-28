@@ -5,11 +5,13 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
+import android.os.Process;
 
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /***
  * 音频播放声音分为MediaPlayer和AudioTrack两种方案的。
@@ -67,6 +69,9 @@ public class AudioTrackManager {
         return mInstance;
     }
 
+    /**
+     * 初始化 AudioTrack
+     */
     private void initTrack() {
         /*根据采样率，采样精度，单双声道来得到frame的大小。注意，按照数字音频的知识，这个算出来的是一秒钟buffer的大小。*/
         mMinBufferSize = AudioRecord.getMinBufferSize(mSampleRateInHz, mChannelConfig, mAudioFormat);
@@ -84,6 +89,113 @@ public class AudioTrackManager {
         try {
             mDis = new DataInputStream(new FileInputStream(file));
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 启动线程
+     */
+    private void startThread() {
+        destroyThread();
+        isStart = true;
+        if (mRecordThread == null) {
+            mRecordThread = new Thread(recordRunnable);
+            mRecordThread.start();
+        }
+    }
+
+    /**
+     * 销毁线程
+     */
+    private void destroyThread() {
+        if (mRecordThread != null && Thread.State.RUNNABLE == mRecordThread.getState()) {
+            isStart = false;
+            try {
+                Thread.sleep(500);
+                mRecordThread.isInterrupted();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                mRecordThread = null;
+            } finally {
+                mRecordThread = null;
+            }
+        }
+    }
+
+    /**
+     * 播放线程
+     */
+    private Runnable recordRunnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                //设置线程的优先级
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_AUDIO);
+                byte[] tempBuffer = new byte[mMinBufferSize];
+                int readCount = 0;
+                while (mDis.available() > 0) {
+                    readCount = mDis.read(tempBuffer);
+                    if (readCount == AudioTrack.ERROR_INVALID_OPERATION || readCount == AudioTrack.ERROR_BAD_VALUE) {
+                        continue;
+                    }
+                    if (readCount != 0 && readCount != -1) {
+                        if (mAudioTrack.getState() == mAudioTrack.STATE_UNINITIALIZED) {
+                            initTrack();
+                        }
+                        mAudioTrack.play();
+                        mAudioTrack.write(tempBuffer, 0, readCount);
+                    }
+                }
+                stopPlay();//播放完就停止播放
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+
+    /**
+     * 启动播放
+     *
+     * @param path
+     */
+    public void startPlay(String path) {
+        try {
+//            //AudioTrack未初始化
+//            if(mAudioTrack.getState() == AudioTrack.STATE_UNINITIALIZED){
+//                throw new RuntimeException("The AudioTrack is not uninitialized");
+//            }//AudioRecord.getMinBufferSize的参数是否支持当前的硬件设备
+//            else if (AudioTrack.ERROR_BAD_VALUE == mMinBufferSize || AudioTrack.ERROR == mMinBufferSize) {
+//                throw new RuntimeException("AudioTrack Unable to getMinBufferSize");
+//            }else{
+            setPath(path);
+            startThread();
+//            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 停止播放
+     */
+    public void stopPlay() {
+        try {
+            destroyThread();//销毁线程
+            if (mAudioTrack != null) {
+                if (mAudioTrack.getState() == AudioRecord.STATE_INITIALIZED) {//初始化成功
+                    mAudioTrack.stop();//停止播放
+                }
+                if (mAudioTrack != null) {
+                    mAudioTrack.release();//释放audioTrack资源
+                }
+            }
+            if (mDis != null) {
+                mDis.close();//关闭数据输入流
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

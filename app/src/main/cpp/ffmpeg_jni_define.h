@@ -8,8 +8,8 @@
 #include <android/log.h>
 #include <jni.h>
 //这里定义了  info  error 日志类型的宏
-#define LOGI(TAG, FORMAT, ...) _android_log_print(ANDROID_LOG_INFO, TAG, FORMAT, ##_VA_ARGS_);
-#define LOGE(TAG, FORMAT, ...) _android_log_print(ANDROID_LOG_ERROR, TAG, FORMAT, ##_VA_ARGS_);
+#define LOGI(TAG, FORMAT, ...) __android_log_print(ANDROID_LOG_INFO, TAG, FORMAT, ##__VA_ARGS__);
+#define LOGE(TAG, FORMAT,...) __android_log_print(ANDROID_LOG_ERROR, TAG, FORMAT, ##__VA_ARGS__);
 
 /**
  * RETURN_TYPE: 返回值类型
