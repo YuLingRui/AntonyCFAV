@@ -11,6 +11,13 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
         <Button
+            android:id="@+id/btn_extract"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/audio_extract"
+            android:layout_marginTop="40dp" />
+
+        <Button
             android:id="@+id/btn_transform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

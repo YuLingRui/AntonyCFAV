@@ -19,74 +19,132 @@ JNIEXPORT void JNICALL
 Java_com_antony_cfav_activity_audio_AudioPlayer_byAudioTrackPlay(JNIEnv *env, jobject instance,
                                                                  jstring audioPath_) {
     const char *audioPath = (*env)->GetStringUTFChars(env, audioPath_, 0);
-    AVFormatContext *aFormatCtx = avformat_alloc_context();
-    // TODO 注册组件
+    LOGI(TAG, "input_cstr=%s", audioPath);
+    //注册组件
     av_register_all();
-    // TODO 打开音频文件
-    if (avformat_open_input(&aFormatCtx, audioPath, NULL, NULL) != 0) {
-        LOGE(TAG, "无法打开音频文件!!!");
+    AVFormatContext *pFormatCtx = avformat_alloc_context();
+    //打开音频文件
+    if(avformat_open_input(&pFormatCtx,audioPath,NULL,NULL) != 0){
+        LOGE(TAG, "无法打开音频文件");
         return;
     }
-    // TODO 获取输入文件信息
-    if (avformat_find_stream_info(aFormatCtx, NULL) != 0) {
-        LOGE(TAG, "无法获取输入文件的信息!!!");
+    //获取输入文件信息
+    if(avformat_find_stream_info(pFormatCtx,NULL) < 0){
+        LOGE(TAG, "无法获取输入文件信息");
         return;
     }
-    // TODO 获取音频流索引位置
-    int audio_stream_index = -1;
-    for (int i = 0; i < aFormatCtx->nb_streams; ++i) {
-        if (aFormatCtx->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
-            audio_stream_index = i;
+    //获取音频流索引位置
+    int i = 0, audio_stream_idx = -1;
+    for(; i < pFormatCtx->nb_streams;i++){
+        if(pFormatCtx->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO){
+            audio_stream_idx = i;
             break;
         }
     }
-    // TODO 获取音频解码器
-    AVCodecContext *aCodecCtx = aFormatCtx->streams[audio_stream_index]->codec;
-    AVCodec *codec = avcodec_find_decoder(aCodecCtx->codec_id);
-    if (codec == NULL) {
-        LOGE(TAG, "无法获取解码器!!!");
+
+    //获取音频解码器
+    AVCodecContext *codecCtx = pFormatCtx->streams[audio_stream_idx]->codec;
+    AVCodec *codec = avcodec_find_decoder(codecCtx->codec_id);
+    if(codec == NULL){
+        LOGE(TAG, "无法获取解码器");
         return;
     }
-    // TODO 打开解码器
-    if (avcodec_open2(aCodecCtx, codec, NULL) != 0) {
-        LOGE(TAG, "无法打开解码器!!!");
+    //打开解码器
+    if(avcodec_open2(codecCtx,codec,NULL) < 0){
+        LOGE(TAG, "无法打开解码器");
         return;
     }
-    // TODO 压缩数据
-    AVPacket *packet = av_malloc(sizeof(AVPacket));
-    // TODO 解压缩数据帧
+    //压缩数据
+    AVPacket *packet = (AVPacket *)av_malloc(sizeof(AVPacket));
+    //解压缩数据
     AVFrame *frame = av_frame_alloc();
     //frame->16bit 44100 PCM 统一音频采样格式与采样率
     SwrContext *swrCtx = swr_alloc();
-    enum AVSampleFormat in_sample_fmt = aCodecCtx->sample_fmt;  //输入的采样格式
-    enum AVSampleFormat out_sample_fmt = AV_SAMPLE_FMT_S16; //输出的采样格式 16bit pcm
-    int in_sample_rate = aCodecCtx->sample_rate; // 输入采样率
-    int out_sample_rate = in_sample_rate;//输出采样率
-    uint64_t in_ch_layout = aCodecCtx->channel_layout; //声道布局(2个声道，默认立体声stereo)
-    uint64_t out_ch_layout = AV_CH_LAYOUT_STEREO;//输出的声道布局(立体声)
-    swr_alloc_set_opts(swrCtx, out_ch_layout, out_sample_fmt, out_sample_rate,
-                       in_ch_layout, in_sample_fmt, in_sample_rate, 0, NULL);//重采样
+
+    //输入的采样格式
+    enum AVSampleFormat in_sample_fmt = codecCtx->sample_fmt;
+    //输出采样格式16bit PCM
+    enum AVSampleFormat out_sample_fmt = AV_SAMPLE_FMT_S16;
+    //输入采样率
+    int in_sample_rate = codecCtx->sample_rate;
+    //输出采样率
+    int out_sample_rate = in_sample_rate;
+    //声道布局（2个声道，默认立体声stereo）
+    uint64_t in_ch_layout = codecCtx->channel_layout;
+    //输出的声道布局（立体声）
+    uint64_t out_ch_layout = AV_CH_LAYOUT_STEREO;
+
+    swr_alloc_set_opts(swrCtx,
+                       out_ch_layout,out_sample_fmt,out_sample_rate,
+                       in_ch_layout,in_sample_fmt,in_sample_rate,
+                       0, NULL);
     swr_init(swrCtx);
-    int out_channel_nb = av_get_channel_layout_nb_channels(out_ch_layout);//输出的声道个数
-    // TODO 这里我们得到 AudioPlayer java类
-    jclass player_class = (*env)->GetObjectClass(env, instance);
-    if (!player_class) {
+
+    //输出的声道个数
+    int out_channel_nb = av_get_channel_layout_nb_channels(out_ch_layout);
+
+    jclass player_class = (*env)->GetObjectClass(env,instance);
+    if(!player_class){
         LOGE(TAG, "player_class not found...");
     }
-    //TODO 找到 AudioPlayer 类中的 "public AudioTrack  createAudioTrack(sampleRate 采样率, channels 声道布局){}" 方法
-    jmethodID audio_track_method = (*env)->GetMethodID(env, player_class, "createAudioTrack",
-                                                       "(II)Landroid/media/AudioTrack;");
-    if (!audio_track_method) {
+    //AudioTrack对象
+    jmethodID audio_track_method = (*env)->GetMethodID(env,player_class,"createAudioTrack","(II)Landroid/media/AudioTrack;");
+    if(!audio_track_method){
         LOGE(TAG, "audio_track_method not found...");
     }
-    //TODO 创建 “AudioTrack” 完成
-    jobject audio_track = (*env)->CallObjectMethod(env, instance, audio_track_method,
-                                                   out_sample_rate, out_channel_nb);
-    jclass audio_track_class = (*env)->GetObjectClass(env, audio_track);
-    // TODO 输入声道布局
-    // TODO 输入声道布局
-    // TODO 输入声道布局
-    avformat_close_input(&aFormatCtx);
+    jobject audio_track = (*env)->CallObjectMethod(env,instance,audio_track_method,out_sample_rate,out_channel_nb);
+
+    //调用play方法
+    jclass audio_track_class = (*env)->GetObjectClass(env,audio_track);
+    jmethodID audio_track_play_mid = (*env)->GetMethodID(env,audio_track_class,"play","()V");
+    (*env)->CallVoidMethod(env,audio_track,audio_track_play_mid);
+
+    //获取write()方法
+    jmethodID audio_track_write_mid = (*env)->GetMethodID(env,audio_track_class,"write","([BII)I");
+
+    //16bit 44100 PCM 数据
+    uint8_t *out_buffer = (uint8_t *)av_malloc(MAX_AUDIO_FRAME_SIZE);
+
+    int got_frame = 0,index = 0, ret;
+    //不断读取编码数据
+    while(av_read_frame(pFormatCtx,packet) >= 0){
+        //解码音频类型的Packet
+        if(packet->stream_index == audio_stream_idx){
+            //解码
+            ret = avcodec_decode_audio4(codecCtx,frame,&got_frame,packet);
+            if(ret < 0){
+                break;
+            }
+            //解码一帧成功
+            if(got_frame > 0){
+                LOGI(TAG, "decode frame count=%d", index++);
+                //音频格式转换
+                swr_convert(swrCtx, &out_buffer, MAX_AUDIO_FRAME_SIZE,(const uint8_t **)frame->data,frame->nb_samples);
+                int out_buffer_size = av_samples_get_buffer_size(NULL, out_channel_nb,
+                                                                 frame->nb_samples, out_sample_fmt, 1);
+
+                jbyteArray audio_sample_array = (*env)->NewByteArray(env,out_buffer_size);
+                jbyte* sample_byte_array = (*env)->GetByteArrayElements(env,audio_sample_array,NULL);
+                //拷贝缓冲数据
+                memcpy(sample_byte_array, out_buffer, (size_t) out_buffer_size);
+                //释放数组
+                (*env)->ReleaseByteArrayElements(env,audio_sample_array,sample_byte_array,0);
+                //调用AudioTrack的write方法进行播放
+                (*env)->CallIntMethod(env,audio_track,audio_track_write_mid,
+                                      audio_sample_array,0,out_buffer_size);
+                //释放局部引用
+                (*env)->DeleteLocalRef(env,audio_sample_array);
+                usleep(1000 * 16);
+            }
+        }
+        av_free_packet(packet);
+    }
+    LOGI(TAG, "decode audio finish");
+    av_frame_free(&frame);
+    av_free(out_buffer);
+    swr_free(&swrCtx);
+    avcodec_close(codecCtx);
+    avformat_close_input(&pFormatCtx);
     (*env)->ReleaseStringUTFChars(env, audioPath_, audioPath);
 }
 

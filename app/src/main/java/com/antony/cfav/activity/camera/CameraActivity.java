@@ -1,4 +1,4 @@
-package com.antony.cfav.activity;
+package com.antony.cfav.activity.camera;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.antony.cfav.R;
-import com.antony.cfav.fragment.Camera2Fragment;
+import com.antony.cfav.fragment.camera.Camera2Fragment;
+
 
 public class CameraActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.antony.cfav.fragment;
+package com.antony.cfav.fragment.camera;
 
 import android.Manifest;
 import android.app.Activity;

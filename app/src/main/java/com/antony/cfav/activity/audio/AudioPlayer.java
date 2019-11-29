@@ -9,6 +9,8 @@ public class AudioPlayer {
         System.loadLibrary("media-handle");
     }
 
+    //使用FFmpeg抽取mp4中的音频数据
+    public native void extractAudio(String src, String dst);
     //使用FFmpeg解码mp3文件---》在用AudioTrack播放音频文件
     public native void byAudioTrackPlay(String audioPath);
 

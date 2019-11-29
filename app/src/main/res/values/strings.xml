@@ -23,6 +23,7 @@
     <string name="permission_dialog_message">为了您能正常使用，需要以下权限</string>
 
     <!-- ==================音视频相关================== -->
+    <string name="audio_extract">音频抽取</string>
     <string name="audio_transform">音频转码</string>
     <string name="audio_cut">音频剪切</string>
     <string name="audio_concat">音频合并</string>
