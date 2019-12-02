@@ -94,10 +94,10 @@ public class AudioHandleActivity extends BaseActivity implements View.OnClickLis
             Toast.makeText(this, "不存在这个文件！", Toast.LENGTH_LONG).show();
             return;
         }
-        if (!FileUtil.isAudio(src)) {
+        /*if (!FileUtil.isAudio(src)) {
             Toast.makeText(this, "非音频文件,无法进行音频相关操作！", Toast.LENGTH_LONG).show();
             return;
-        }
+        }*/
         switch (type) {
             case 0:
                 new Thread(new Runnable() {
