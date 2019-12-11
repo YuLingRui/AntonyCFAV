@@ -23,8 +23,9 @@
     <string name="permission_dialog_message">为了您能正常使用，需要以下权限</string>
 
     <!-- ==================音视频相关================== -->
-    <string name="audio_extract">音频抽取</string>
-    <string name="audio_transform">音频转码</string>
+    <string name="audio_extract">抽取音频</string>
+    <string name="audio_extract_pcm">抽取音频裸数据(Pcm)</string>
+    <string name="audio_transform">音频转换格式</string>
     <string name="audio_cut">音频剪切</string>
     <string name="audio_concat">音频合并</string>
     <string name="audio_mix">音频混合</string>
@@ -48,6 +49,9 @@
     <string name="video_concat">视频拼接</string>
     <string name="video_water_mark">视频水印</string>
     <string name="video_to_gif">视频转Gif</string>
+    <string name="video_extract_h264">抽取视频[H264]</string>
+    <string name="video_extract_h264_by_command">使用命令行抽取视频[H264]</string>
+    <string name="video_extract_yuv_by_command">使用命令行抽取视频[YUV]</string>
     <string name="video_transform">视频转码</string>
     <string name="video_screen_shot">视频截图</string>
     <string name="video_screen_record">屏幕录制</string>

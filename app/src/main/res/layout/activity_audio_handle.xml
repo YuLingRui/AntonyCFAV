@@ -14,8 +14,12 @@
             android:id="@+id/btn_extract"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/audio_extract"
-            android:layout_marginTop="40dp" />
+            android:text="@string/audio_extract" />
+        <Button
+            android:id="@+id/btn_extract_pcm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/audio_extract_pcm" />
 
         <Button
             android:id="@+id/btn_transform"
@@ -65,12 +69,6 @@
             android:text="@string/audio_encode"
             android:layout_marginTop="10dp" />
 
-        <Button
-            android:id="@+id/btn_pcm_concat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pcm_concat"
-            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <ProgressBar

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.antony.cfav.R;
 import com.antony.cfav.activity.audio.AudioHandleActivity;
+import com.antony.cfav.activity.video.VideoHandleActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -47,7 +48,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 intent.setClass(MainActivity.this, AudioHandleActivity.class);
                 break;
             case R.id.btn_video://视频处理
-                //intent.setClass(MainActivity.this, VideoHandleActivity.class);
+                intent.setClass(MainActivity.this, VideoHandleActivity.class);
                 break;
             case R.id.btn_media://音视频处理
                 //intent.setClass(MainActivity.this, MediaHandleActivity.class);
