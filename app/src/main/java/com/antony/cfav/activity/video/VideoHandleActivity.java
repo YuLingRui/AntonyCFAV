@@ -60,6 +60,8 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
         Button btn_video_extract_h264 = findViewById(R.id.btn_video_extract_h264);
         Button btn_video_extract_h264_command = findViewById(R.id.btn_video_extract_h264_by_command);
         Button btn_video_extract_yuv_command = findViewById(R.id.btn_video_extract_yuv_by_command);
+        Button btn_video_format_conversion = findViewById(R.id.btn_video_format_conversion);
+
         Button btn_video_transform = findViewById(R.id.btn_video_transform);
         Button btn_video_cut = findViewById(R.id.btn_video_cut);
         Button btn_video_concat = findViewById(R.id.btn_video_concat);
@@ -76,6 +78,7 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
         btn_video_extract_h264.setOnClickListener(this);
         btn_video_extract_h264_command.setOnClickListener(this);
         btn_video_extract_yuv_command.setOnClickListener(this);
+        btn_video_format_conversion.setOnClickListener(this);
         btn_video_transform.setOnClickListener(this);
         btn_video_cut.setOnClickListener(this);
         btn_video_concat.setOnClickListener(this);
@@ -94,14 +97,17 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_video_extract_h264:
+            case R.id.btn_video_extract_h264://抽取h264数据
                 videoDispose(R.id.btn_video_extract_h264, ResPath.FateCinematicMP4, ResPath.ExtractH264);
                 break;
-            case R.id.btn_video_extract_h264_by_command:
+            case R.id.btn_video_extract_h264_by_command://使用命令 抽取h264数据
                 videoDispose(R.id.btn_video_extract_h264_by_command, ResPath.FateCinematicMP4, ResPath.ExtractH264ByCommand);
                 break;
-            case R.id.btn_video_extract_yuv_by_command:
+            case R.id.btn_video_extract_yuv_by_command://使用命令 抽取YUV裸数据
                 videoDispose(R.id.btn_video_extract_yuv_by_command, ResPath.FateCinematicMP4, ResPath.ExtractYuv);
+                break;
+            case R.id.btn_video_format_conversion:// mp4格式 转成  flv格式
+                videoDispose(R.id.btn_video_format_conversion, ResPath.FateCinematicMP4, ResPath.ConversionFlv);
                 break;
         }
     }
@@ -134,6 +140,9 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_video_extract_yuv_by_command: //.mp4文件中抽取 .yuv使用ffmpeg命令行
                 commands = FFmpegUtil.extractVideoYUV(src, dst);
+                break;
+            case R.id.btn_video_format_conversion:// mp4格式 转成  flv格式
+                videoDispose(R.id.btn_video_format_conversion, ResPath.FateCinematicMP4, ResPath.ConversionFlv);
                 break;
         }
         if (ffmpegHandler != null) {

@@ -9,8 +9,7 @@
 #include "libswresample/swresample.h" //重采样
 #include <android/log.h>
 /*
-* 1. 使用ffmpeg 将.mp3文件 解码成 .pcm裸数据
-* 2. 使用Android AudioTrack 播放pcm数据
+*  抽取MP4中的 音频数据[.aac]
 */
 #define TAG "AudioPlayer"
 /**

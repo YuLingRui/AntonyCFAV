@@ -53,6 +53,7 @@
     <string name="video_extract_h264_by_command">使用命令行抽取视频[H264]</string>
     <string name="video_extract_yuv_by_command">使用命令行抽取视频[YUV]</string>
     <string name="video_transform">视频转码</string>
+    <string name="video_fromat_conversion">视频格式转换</string>
     <string name="video_screen_shot">视频截图</string>
     <string name="video_screen_record">屏幕录制</string>
     <string name="video_from_photo">图片合成视频</string>
