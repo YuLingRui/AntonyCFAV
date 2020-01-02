@@ -16,7 +16,8 @@ add_library(media-handle
         src/main/cpp/audio_player.c
         src/main/cpp/audio_lame.c
         src/main/cpp/video_extract_h264.c
-        src/main/cpp/video_format_conversion.c)
+        src/main/cpp/video_format_conversion.c
+        src/main/cpp/video_cut.c)
 
 add_library(ffmpeg
         SHARED

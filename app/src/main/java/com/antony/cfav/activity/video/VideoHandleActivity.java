@@ -61,9 +61,10 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
         Button btn_video_extract_h264_command = findViewById(R.id.btn_video_extract_h264_by_command);
         Button btn_video_extract_yuv_command = findViewById(R.id.btn_video_extract_yuv_by_command);
         Button btn_video_format_conversion = findViewById(R.id.btn_video_format_conversion);
-
         Button btn_video_transform = findViewById(R.id.btn_video_transform);
         Button btn_video_cut = findViewById(R.id.btn_video_cut);
+        Button btn_video_cut_by_command = findViewById(R.id.btn_video_cut_by_command);
+
         Button btn_video_concat = findViewById(R.id.btn_video_concat);
         Button btn_screen_shot = findViewById(R.id.btn_screen_shot);
         Button btn_water_mark = findViewById(R.id.btn_water_mark);
@@ -81,6 +82,7 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
         btn_video_format_conversion.setOnClickListener(this);
         btn_video_transform.setOnClickListener(this);
         btn_video_cut.setOnClickListener(this);
+        btn_video_cut_by_command.setOnClickListener(this);
         btn_video_concat.setOnClickListener(this);
         btn_screen_shot.setOnClickListener(this);
         btn_water_mark.setOnClickListener(this);
@@ -108,6 +110,12 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_video_format_conversion:// mp4格式 转成  flv格式
                 videoDispose(R.id.btn_video_format_conversion, ResPath.FateCinematicMP4, ResPath.ConversionFlv);
+                break;
+            case R.id.btn_video_cut://截取MP4中的一段
+                videoDispose(R.id.btn_video_cut, ResPath.FateCinematicMP4, ResPath.CutMp4);
+                break;
+            case R.id.btn_video_cut_by_command://截取MP4中的一段, 使用ffmpeg命令
+                videoDispose(R.id.btn_video_cut_by_command, ResPath.FateCinematicMP4, ResPath.CutMp4ByCommand);
                 break;
         }
     }
@@ -143,6 +151,18 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_video_format_conversion:// mp4格式 转成  flv格式
                 videoDispose(R.id.btn_video_format_conversion, ResPath.FateCinematicMP4, ResPath.ConversionFlv);
+                break;
+            case R.id.btn_video_cut://截取MP4中的一段
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        VideoPlayer player = new VideoPlayer();
+                        player.cutSection(10, 50, src, dst);
+                    }
+                }).start();
+                break;
+            case R.id.btn_video_cut_by_command://截取MP4中的一段, 使用命令
+                commands = FFmpegUtil.cutVideo(src, 10, 30, dst);
                 break;
         }
         if (ffmpegHandler != null) {

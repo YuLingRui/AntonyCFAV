@@ -53,18 +53,25 @@
                 android:text="@string/video_fromat_conversion" />
 
             <Button
-                android:id="@+id/btn_video_transform"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/video_transform" />
-
-            <Button
                 android:id="@+id/btn_video_cut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/video_cut" />
+
+            <Button
+                android:id="@+id/btn_video_cut_by_command"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/video_cut_by_command" />
+
+            <Button
+                android:id="@+id/btn_video_transform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/video_transform" />
 
             <Button
                 android:id="@+id/btn_video_concat"

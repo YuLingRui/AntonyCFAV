@@ -37,4 +37,6 @@ public class ResPath {
     public static final String ExtractH264ByCommand = VIDEO_PATH + "extract2.h264";//提取.h264数据使用命令行
     public static final String ExtractYuv = VIDEO_PATH + "extract.yuv";//提取裸数据YUV
     public static final String ConversionFlv = VIDEO_PATH + "conversion.flv";//格式转换，这里是mp4转flv
+    public static final String CutMp4 = VIDEO_PATH + "cut.mp4";//截取mp4中一段
+    public static final String CutMp4ByCommand = VIDEO_PATH + "cut2.mp4";//截取mp4中一段,使用命令行
 }

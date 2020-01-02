@@ -109,6 +109,7 @@ public class FFmpegUtil {
 
     /**
      * 抽取多媒体中 H264数据
+     *
      * @param srcFile
      * @param targetFile
      * @return
@@ -122,6 +123,7 @@ public class FFmpegUtil {
 
     /**
      * 抽取多媒体中 YUV裸数据
+     *
      * @param srcFile
      * @param targetFile
      * @return
@@ -131,6 +133,21 @@ public class FFmpegUtil {
         String encode = "ffmpeg -i %s -an -c:v rawvideo -pix_fmt yuv420p %s";
         encode = String.format(encode, srcFile, targetFile);
         return encode.split(" ");
+    }
+
+    /**
+     * 使用ffmpeg命令进行视频剪切
+     * @param srcFile 源文件
+     * @param startTime 剪切的开始时间
+     * @param endTime 剪切的结束时间
+     * @param targetFile 目标文件
+     * @return
+     */
+    @SuppressLint("DefaultLocale")
+    public static String[] cutVideo(String srcFile, int startTime, int endTime, String targetFile) {
+        String cutVideo = "ffmpeg -i %s -ss %d -t %d %s";
+        cutVideo = String.format(cutVideo, srcFile,startTime, endTime, targetFile);
+        return cutVideo.split(" ");
     }
 
 }

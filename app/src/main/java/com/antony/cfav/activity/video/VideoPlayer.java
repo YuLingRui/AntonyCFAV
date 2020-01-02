@@ -10,4 +10,6 @@ public class VideoPlayer {
     public native void extractVideoH264(String src, String dst);
     //使用FFmpeg将 .mp4格式 转成  .flv格式
     public native void formatConversion(String src, String dst);
+    //使用FFmpeg 截取mp4中的一段
+    public native void cutSection(int startTime, int endTime, String src, String dst);
 }
