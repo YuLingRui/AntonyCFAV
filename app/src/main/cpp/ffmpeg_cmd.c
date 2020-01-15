@@ -6,6 +6,9 @@
 #include "ffmpeg.h"
 
 
+/**
+ * 使用ffmpeg命令行 来操作多媒体文件  ffmpeg command
+ */
 #define TAG "FFmpegUtil"
 
 JNIEXPORT jint JNICALL
@@ -27,6 +30,7 @@ Java_com_antony_cfav_ffmpeg_FFmpegCmd_handle(JNIEnv *env, jclass type, jobjectAr
         free(argv[i]);//释放内存
     }
     free(argv);
+    LOGI(TAG, "result %d", result);
     return result;
 }
 

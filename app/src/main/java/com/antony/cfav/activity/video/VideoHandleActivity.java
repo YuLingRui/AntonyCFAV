@@ -64,12 +64,9 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
         Button btn_video_transform = findViewById(R.id.btn_video_transform);
         Button btn_video_cut = findViewById(R.id.btn_video_cut);
         Button btn_video_cut_by_command = findViewById(R.id.btn_video_cut_by_command);
-
-        Button btn_video_concat = findViewById(R.id.btn_video_concat);
         Button btn_screen_shot = findViewById(R.id.btn_screen_shot);
         Button btn_water_mark = findViewById(R.id.btn_water_mark);
         Button btn_generate_gif = findViewById(R.id.btn_generate_gif);
-        Button btn_screen_record = findViewById(R.id.btn_screen_record);
         Button btn_combine_video = findViewById(R.id.btn_combine_video);
         Button btn_multi_video = findViewById(R.id.btn_multi_video);
         Button btn_reverse_video = findViewById(R.id.btn_reverse_video);
@@ -83,11 +80,9 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
         btn_video_transform.setOnClickListener(this);
         btn_video_cut.setOnClickListener(this);
         btn_video_cut_by_command.setOnClickListener(this);
-        btn_video_concat.setOnClickListener(this);
         btn_screen_shot.setOnClickListener(this);
         btn_water_mark.setOnClickListener(this);
         btn_generate_gif.setOnClickListener(this);
-        btn_screen_record.setOnClickListener(this);
         btn_combine_video.setOnClickListener(this);
         btn_multi_video.setOnClickListener(this);
         btn_reverse_video.setOnClickListener(this);
@@ -116,6 +111,27 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_video_cut_by_command://截取MP4中的一段, 使用ffmpeg命令
                 videoDispose(R.id.btn_video_cut_by_command, ResPath.FateCinematicMP4, ResPath.CutMp4ByCommand);
+                break;
+            case R.id.btn_video_concat://视频拼接
+                videoDispose(R.id.btn_video_concat, ResPath.FateCinematicMP4, ResPath.ConcatVideo);
+                break;
+            case R.id.btn_video_transform: //视频转码
+                videoDispose(R.id.btn_video_transform, ResPath.FateCinematicMP4, ResPath.TransformFlv);
+                break;
+            case R.id.btn_screen_shot://视频截图
+                videoDispose(R.id.btn_screen_shot, ResPath.FateCinematicMP4, ResPath.ScreenShotJpg);
+                break;
+            case R.id.btn_water_mark://视频添加水印
+                videoDispose(R.id.btn_water_mark, ResPath.FateCinematicMP4, ResPath.WaterMark);
+                break;
+            case R.id.btn_pip: //画中画
+                videoDispose(R.id.btn_pip, ResPath.FateCinematicMP4, ResPath.PicInPic);
+                break;
+            case R.id.btn_generate_gif://视频转成gif图
+                videoDispose(R.id.btn_generate_gif, ResPath.FateCinematicMP4, ResPath.PicGif);
+                break;
+            case R.id.btn_combine_video://图片转视频
+
                 break;
         }
     }
@@ -150,7 +166,13 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
                 commands = FFmpegUtil.extractVideoYUV(src, dst);
                 break;
             case R.id.btn_video_format_conversion:// mp4格式 转成  flv格式
-                videoDispose(R.id.btn_video_format_conversion, ResPath.FateCinematicMP4, ResPath.ConversionFlv);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        VideoPlayer player = new VideoPlayer();
+                        player.formatConversion(src, dst);
+                    }
+                }).start();
                 break;
             case R.id.btn_video_cut://截取MP4中的一段
                 new Thread(new Runnable() {
@@ -163,6 +185,32 @@ public class VideoHandleActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_video_cut_by_command://截取MP4中的一段, 使用命令
                 commands = FFmpegUtil.cutVideo(src, 10, 30, dst);
+                break;
+            case R.id.btn_video_concat://视频拼接【使用命令行】
+                commands = FFmpegUtil.concatVideo(src, ResPath.CinematicMP4, dst);
+                break;
+            case R.id.btn_video_transform: //视频转码
+                commands = FFmpegUtil.transformVideo(src, dst);
+                break;
+            case R.id.btn_screen_shot://视频截图
+                int time = 18;
+                String size = "1080X720";
+                commands = FFmpegUtil.screenShot(src, time, size, dst);
+                break;
+            case R.id.btn_water_mark://视频添加水印
+                String resolution = "720x1280";
+                int bitRate = 1024;
+                commands = FFmpegUtil.addWaterMark(src, ResPath.onejpg, resolution, bitRate, dst);
+                break;
+            case R.id.btn_pip: //画中画
+                commands = FFmpegUtil.pinInPicVideo(src, ResPath.CinematicMP4, 200, 150, dst);
+                break;
+            case R.id.btn_generate_gif://视频转成gif图
+                int gifStart = 30;
+                int gifDuration = 5;
+                String solution = "720x1280";//240x320、480x640、1080x1920
+                int frameRate = 10;
+                commands = FFmpegUtil.generateGif(src, gifStart, gifDuration, solution, frameRate, dst);
                 break;
         }
         if (ffmpegHandler != null) {

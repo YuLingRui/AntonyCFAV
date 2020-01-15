@@ -37,6 +37,7 @@
     <string name="audio_handle">音频处理</string>
     <string name="media_handle">音视频处理</string>
     <string name="video_handle">视频处理</string>
+    <string name="multimedia_codec">编解码</string>
     <string name="video_push">本地推流直播</string>
     <string name="video_live">实时推流直播</string>
 
@@ -47,7 +48,7 @@
 
     <string name="video_cut">视频剪切</string>
     <string name="video_concat">视频拼接</string>
-    <string name="video_water_mark">视频水印</string>
+    <string name="video_water_mark">视频添加水印</string>
     <string name="video_to_gif">视频转Gif</string>
     <string name="video_extract_h264">抽取视频[H264]</string>
     <string name="video_extract_h264_by_command">使用命令行抽取视频[H264]</string>

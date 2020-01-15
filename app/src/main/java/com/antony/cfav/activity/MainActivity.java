@@ -50,6 +50,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_video://视频处理
                 intent.setClass(MainActivity.this, VideoHandleActivity.class);
                 break;
+            case R.id.btn_codec: //编解码(H264  AAC)
+
+                break;
             case R.id.btn_media://音视频处理
                 //intent.setClass(MainActivity.this, MediaHandleActivity.class);
                 break;

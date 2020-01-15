@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AntonyCFAV.iml" filepath="$PROJECT_DIR$/AntonyCFAV.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codec/codec.iml" filepath="$PROJECT_DIR$/codec/codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" filepath="$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libyuv-single/libyuv-single.iml" filepath="$PROJECT_DIR$/libyuv-single/libyuv-single.iml" />
     </modules>
   </component>
 </project>

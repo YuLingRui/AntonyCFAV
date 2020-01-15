@@ -95,6 +95,7 @@ public class FileUtil {
      * @return 文件是否存在
      */
     public static boolean checkFileExist(String path){
+        Log.e("FileUtil", "path: "+path);
         if (TextUtils.isEmpty(path)) {
             return false;
         }

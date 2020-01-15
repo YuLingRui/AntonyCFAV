@@ -21,6 +21,15 @@
         android:layout_below="@+id/btn_audio"/>
 
     <Button
+        android:id="@+id/btn_codec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/multimedia_codec"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_video"/>
+
+    <Button
         android:id="@+id/btn_media"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
