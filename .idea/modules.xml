@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AntonyCFAV.iml" filepath="$PROJECT_DIR$/AntonyCFAV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android_codec/android_codec.iml" filepath="$PROJECT_DIR$/android_codec/android_codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antony_codec/antony_codec.iml" filepath="$PROJECT_DIR$/antony_codec/antony_codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antonycodec/antonycodec.iml" filepath="$PROJECT_DIR$/antonycodec/antonycodec.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/codec/codec.iml" filepath="$PROJECT_DIR$/codec/codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" filepath="$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" />

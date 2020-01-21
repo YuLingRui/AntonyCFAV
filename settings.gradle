@@ -1,1 +1,1 @@
-include ':app', ':codec', ':libyuv-single', ':ffmpeg-single'
+include ':app', ':codec', ':libyuv-single', ':ffmpeg-single', ':android_codec', ':antonycodec', ':antony_codec'

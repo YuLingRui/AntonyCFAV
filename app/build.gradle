@@ -12,11 +12,13 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags ""
+                arguments "-DANDROID_STL=c++_shared"
             }
         }
         ndk {
             abiFilters 'armeabi-v7a'
         }
+
     }
     buildTypes {
         release {

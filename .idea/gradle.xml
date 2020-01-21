@@ -8,6 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/android_codec" />
+            <option value="$PROJECT_DIR$/antony_codec" />
+            <option value="$PROJECT_DIR$/antonycodec" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/codec" />
             <option value="$PROJECT_DIR$/ffmpeg-single" />
@@ -15,6 +18,7 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
