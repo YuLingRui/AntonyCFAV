@@ -4,7 +4,7 @@ find_library(log-lib log)
 find_library(android-lib android)
 
 add_library(native-lib SHARED
-    src/main/cpp//native-lib.cpp
+    src/main/cpp/nativie-lib.cpp
 )
 
 set(JNI_LIBS_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs)
@@ -14,28 +14,28 @@ add_library(avutil
         IMPORTED)
 set_target_properties(avutil
         PROPERTIES  IMPORTED_LOCATION
-        ${JNI_LIBS_DIR}/${CMAKE_ABI}/libavutil.so)
+        ../../../../src/main/jniLibs/armeabi-v7a/libavutil.so)
 
 add_library(swresample
         SHARED
         IMPORTED )
 set_target_properties(swresample
         PROPERTIES IMPORTED_LOCATION
-        ${JNI_LIBS_DIR}/${ANDROID_ABI}/libswresample.so )
+        ../../../../src/main/jniLibs/armeabi-v7a/libswresample.so )
 
 add_library(swscale
         SHARED
         IMPORTED )
 set_target_properties(swscale
         PROPERTIES IMPORTED_LOCATION
-        ${JNI_LIBS_DIR}/${ANDROID_ABI}/libswscale.so )
+        ../../../../src/main/jniLibs/armeabi-v7a/libswscale.so )
 
 add_library(avcodec
         SHARED
         IMPORTED )
 set_target_properties(avcodec
         PROPERTIES IMPORTED_LOCATION
-        ${JNI_LIBS_DIR}/${ANDROID_ABI}/libavcodec.so )
+        ../../../../src/main/jniLibs/armeabi-v7a/libavcodec.so )
 
 add_library(avformat
         SHARED
@@ -43,21 +43,21 @@ add_library(avformat
 set_target_properties(avformat
         PROPERTIES
         IMPORTED_LOCATION
-        ${JNI_LIBS_DIR}/${ANDROID_ABI}/libavformat.so )
+        ../../../../src/main/jniLibs/armeabi-v7a/libavformat.so )
 
 add_library(avfilter
         SHARED
         IMPORTED )
 set_target_properties(avfilter
         PROPERTIES IMPORTED_LOCATION
-        ${JNI_LIBS_DIR}/${ANDROID_ABI}/libavfilter.so )
+        ../../../../src/main/jniLibs/armeabi-v7a/libavfilter.so )
 
 add_library(avdevice
         SHARED
         IMPORTED )
 set_target_properties(avdevice
         PROPERTIES IMPORTED_LOCATION
-        ${JNI_LIBS_DIR}/${ANDROID_ABI}/libavdevice.so )
+        ../../../../src/main/jniLibs/armeabi-v7a/libavdevice.so )
 
 include_directories(${JNI_LIBS_DIR}/includes)
 
