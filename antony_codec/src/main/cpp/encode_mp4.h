@@ -7,7 +7,7 @@
 
 
 #include "encode_video.h"
-
+#ifdef __cplusplus
 extern "C" {
 #endif
 #include <libavcodec/avcodec.h>
@@ -21,7 +21,7 @@ extern "C" {
 
 class MP4Encoder : public VideoEncoder {
 private:
-    const char *mpePath;
+    const char *mp4Path;
     int width;
     int height;
     AVPacket avPacket;
