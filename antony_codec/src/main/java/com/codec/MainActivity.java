@@ -1,14 +1,99 @@
 package com.codec;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.codec.activity.CameraFFEncodeActivity;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    /*权限请求Code*/
+    private final static int PERMISSION_REQUEST_CODE = 1234;
+    /*我们需要使用的权限*/
+    private String[] permissions = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*SDK>6.0 权限申请*/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                checkSelfPermission(permissions[0]) != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(permissions[1]) != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(permissions[2]) != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(permissions[3]) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+        }
+        Button naked_data_encode = findViewById(R.id.naked_data_encode);
+        Button multimedia_decdec = findViewById(R.id.multimedia_decdec);
+        naked_data_encode.setOnClickListener(this);
+        multimedia_decdec.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.naked_data_encode:
+                intent.setClass(MainActivity.this, CameraFFEncodeActivity.class);
+                break;
+            case R.id.multimedia_decdec:
+                break;
+        }
+        startActivity(intent);
+    }
+
+
+    //权限反馈
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                /*PackageManager.PERMISSION_GRANTED  权限被许可*/
+                /*PackageManager.PERMISSION_DENIED  没有权限；拒绝访问*/
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    showWaringDialog("无法读取内存卡！");
+                } else if (grantResults.length > 0 && grantResults[1] != PackageManager.PERMISSION_GRANTED) {
+                    showWaringDialog("无法读取内存卡！");
+                } else if (grantResults.length > 0 && grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+                    showWaringDialog("无法使用相机！");
+                } else if (grantResults.length > 0 && grantResults[3] != PackageManager.PERMISSION_GRANTED) {
+                    showWaringDialog("无法录制音频！");
+                }
+                break;
+        }
+    }
+
+    private void showWaringDialog(String msg) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("警告！")
+                .setMessage(msg)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 一般情况下如果用户不授权的话，功能是无法运行的，我们暂时做退出处理
+                        finish();
+                    }
+                }).setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 一般情况下如果用户不授权的话，功能是无法运行的，我们暂时做退出处理
+                        finish();
+                    }
+                }).show();
     }
 }

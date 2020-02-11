@@ -7,19 +7,19 @@ android {
 
     defaultConfig {
         applicationId "com.codec"
-        minSdkVersion 15
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        externalNativeBuild{
-            cmake{
+        externalNativeBuild {
+            cmake {
                 cppFlags "-frtti -fexceptions"
             }
         }
-        ndk{
+        ndk {
             abiFilters 'armeabi-v7a'
         }
 
@@ -49,6 +49,8 @@ dependencies {
     implementation project(':libyuv-single')
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

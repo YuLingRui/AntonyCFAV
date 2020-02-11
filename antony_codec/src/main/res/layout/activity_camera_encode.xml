@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/camera_root_layer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_encode_mp4_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onEncodeStart"
+            android:text="FF开始编码MP4" />
+
+        <Button
+            android:id="@+id/btn_encode_mp4_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="onEncodeStop"
+            android:text="FF停止编码MP4" />
+
+        <Button
+            android:id="@+id/btn_encode_jpeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onEncodeJPEG"
+            android:text="FF编码JPEG" />
+
+    </LinearLayout>
+
+    <com.codec.view.AutoFitTextureView
+        android:id="@+id/auto_textureview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

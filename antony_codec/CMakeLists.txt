@@ -3,9 +3,14 @@ cmake_minimum_required(VERSION 3.4.1)
 find_library(log-lib log)
 find_library(android-lib android)
 
-add_library(native-lib SHARED
-    src/main/cpp/nativie-lib.cpp
-)
+include_directories(./src/main/cpp)
+
+add_library(antony-lib SHARED
+        src/main/cpp/nativie-lib.cpp
+        src/main/cpp/native_code.cpp
+        src/main/cpp/encode_video.cpp
+        src/main/cpp/encode_mp4.cpp
+        src/main/cpp/encode_jpeg.cpp)
 
 set(JNI_LIBS_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs)
 
@@ -76,6 +81,6 @@ set_target_properties(libyuv
 # libyuv库头文件
 include_directories(${LIBYUV_DIR}/libs/${ANDROID_ABI}/include)
 
-target_link_libraries(native-lib
+target_link_libraries(antony-lib
         avutil swresample swscale avcodec avformat avfilter avdevice libyuv
         ${log-lib} ${android-lib} )
