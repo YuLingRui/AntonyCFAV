@@ -3,6 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AntonyCFAV.iml" filepath="$PROJECT_DIR$/AntonyCFAV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android_codec/AntonyCFAV-android_codec.iml" filepath="$PROJECT_DIR$/android_codec/AntonyCFAV-android_codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antony_codec/AntonyCFAV-antony_codec.iml" filepath="$PROJECT_DIR$/antony_codec/AntonyCFAV-antony_codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antonycodec/AntonyCFAV-antonycodec.iml" filepath="$PROJECT_DIR$/antonycodec/AntonyCFAV-antonycodec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AntonyCFAV-app.iml" filepath="$PROJECT_DIR$/app/AntonyCFAV-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codec/AntonyCFAV-codec.iml" filepath="$PROJECT_DIR$/codec/AntonyCFAV-codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ffmpeg-single/AntonyCFAV-ffmpeg-single.iml" filepath="$PROJECT_DIR$/ffmpeg-single/AntonyCFAV-ffmpeg-single.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libyuv-single/AntonyCFAV-libyuv-single.iml" filepath="$PROJECT_DIR$/libyuv-single/AntonyCFAV-libyuv-single.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AntonyGitProject-AntonyCFAV.iml" filepath="$PROJECT_DIR$/AntonyGitProject-AntonyCFAV.iml" />
       <module fileurl="file://$PROJECT_DIR$/android_codec/android_codec.iml" filepath="$PROJECT_DIR$/android_codec/android_codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/antony_codec/antony_codec.iml" filepath="$PROJECT_DIR$/antony_codec/antony_codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/antonycodec/antonycodec.iml" filepath="$PROJECT_DIR$/antonycodec/antonycodec.iml" />

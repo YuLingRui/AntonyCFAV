@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".androidmedia.AndroidRecordActivity">
+
+    <Button
+        android:id="@+id/media_record_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AudioRecord录音"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/media_convert_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" PCM to WAV"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/media_track_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AudioTrack播放录音"
+        android:textSize="16sp" />
+
+</LinearLayout>
