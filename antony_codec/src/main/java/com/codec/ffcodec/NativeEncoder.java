@@ -1,5 +1,8 @@
 package com.codec.ffcodec;
 
+/**
+ * 通过Camera v1 预览 使用FFmpeg编码
+ */
 public class NativeEncoder {
 
     static {

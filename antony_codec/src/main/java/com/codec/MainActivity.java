@@ -2,7 +2,6 @@ package com.codec;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -13,7 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.codec.activity.CameraFFEncodeActivity;
+import com.codec.ffmpegmedia.CameraV2FFEncodeActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /*权限请求Code*/
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.naked_data_encode:
-                intent.setClass(MainActivity.this, CameraFFEncodeActivity.class);
+                intent.setClass(MainActivity.this, CameraV2FFEncodeActivity.class);
                 break;
             case R.id.multimedia_decdec:
                 break;

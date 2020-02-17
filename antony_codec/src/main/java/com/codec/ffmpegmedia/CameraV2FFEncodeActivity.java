@@ -1,11 +1,10 @@
-package com.codec.activity;
+package com.codec.ffmpegmedia;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -18,7 +17,6 @@ import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
@@ -48,10 +46,10 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Camera收集裸数据， ffmpeg进行编码
+ * Camera2收集裸数据， ffmpeg进行编码
  */
-public class CameraFFEncodeActivity extends AppCompatActivity implements View.OnClickListener {
-    private final String TAG = "CameraFFEncodeActivity";
+public class CameraV2FFEncodeActivity extends AppCompatActivity implements View.OnClickListener {
+    private final String TAG = "CameraV2FFEncodeActivity";
     private static final String TAG_PREVIEW = "预览";
     /*Camera 摄像头ID*/
     private String mCameraId;

@@ -20,4 +20,6 @@ public class ResPath {
      *  视频存放地址
      */
     public static final String VIDEO_PATH = PATH + "CFAV_VIDEO" + File.separator;
+    //FFmpeg 编码H264 范例
+    public static final String ENCODE_H264_EXAMPLE = VIDEO_PATH + "enexample.h264";
 }

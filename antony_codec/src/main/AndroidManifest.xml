@@ -18,9 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".androidmedia.AndroidRecordActivity"></activity>
-        <activity android:name=".activity.CameraV1FFEncodeActivity" />
-        <activity android:name=".activity.CameraFFEncodeActivity" />
+        <activity android:name=".androidmedia.AndroidRecordActivity" />
+        <activity android:name=".ffmpegmedia.CameraV1FFEncodeActivity" />
+        <activity android:name=".ffmpegmedia.CameraV2FFEncodeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ffmpegmedia.FFEncodeH264ExampleActivity"></activity>
     </application>
 
 </manifest>

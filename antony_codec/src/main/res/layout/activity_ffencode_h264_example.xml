@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ffmpegmedia.FFEncodeH264ExampleActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_handle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_encode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFmpeg编码范例" />
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progress_encode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

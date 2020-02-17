@@ -10,7 +10,8 @@ add_library(antony-lib SHARED
         src/main/cpp/native_code.cpp
         src/main/cpp/encode_video.cpp
         src/main/cpp/encode_mp4.cpp
-        src/main/cpp/encode_jpeg.cpp)
+        src/main/cpp/encode_jpeg.cpp
+        src/main/cpp/native_ffencode_h264.c)
 
 set(JNI_LIBS_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs)
 

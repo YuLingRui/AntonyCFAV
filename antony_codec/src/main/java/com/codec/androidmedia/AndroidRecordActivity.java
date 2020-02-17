@@ -25,6 +25,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * AndroidRecord 录音 AndroidTrack播放
+ */
 public class AndroidRecordActivity extends AppCompatActivity implements View.OnClickListener {
     /**
      * 采样率，现在能够保证在所有设备上使用的采样率是44100Hz, 但是其他的采样率（22050, 16000, 11025）在一些设备上也可以使用。

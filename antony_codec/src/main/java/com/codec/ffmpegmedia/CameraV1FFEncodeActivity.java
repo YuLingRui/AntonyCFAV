@@ -1,4 +1,4 @@
-package com.codec.activity;
+package com.codec.ffmpegmedia;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.codec.R;
-import com.codec.ffcodec.CameraV1;
+import com.codec.camera.CameraV1;
 
 import java.io.File;
 

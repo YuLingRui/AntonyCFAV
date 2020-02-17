@@ -1,4 +1,4 @@
-package com.codec.ffcodec;
+package com.codec.camera;
 
 import android.app.Activity;
 import android.graphics.ImageFormat;
@@ -8,6 +8,7 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.codec.ffcodec.NativeEncoder;
 import com.codec.interfaca.ICamera;
 import com.codec.view.AutoFitTextureView;
 
