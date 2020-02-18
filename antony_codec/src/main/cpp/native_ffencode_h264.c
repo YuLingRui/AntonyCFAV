@@ -9,19 +9,21 @@
 #include <libavutil/opt.h>
 #include <libavutil/imgutils.h>
 
-#define TAG "FFencodeNative"
+#define TAG "FFcodecNative"
 
 JNIEXPORT jint JNICALL
 Java_com_codec_ffcodec_FFcodecNative_encode_1example(JNIEnv *env, jobject instance,
                                                       jstring enPath_, jstring codecName_) {
     const char *enPath = (*env)->GetStringUTFChars(env, enPath_, 0);
     const char *codecName = (*env)->GetStringUTFChars(env, codecName_, 0);
+    LOGI(TAG, "%s", enPath);
+    LOGI(TAG, "%s", codecName);
     AVCodecContext *avCodecCtx;
     const AVCodec *codec;
     AVFrame *frame;
     AVPacket pkt;
     FILE *file;
-
+    avcodec_register_all();
     codec = avcodec_find_encoder_by_name(codecName);
     if (!codec) {
         LOGE(TAG, "AVCodec  is  null");
@@ -36,8 +38,8 @@ Java_com_codec_ffcodec_FFcodecNative_encode_1example(JNIEnv *env, jobject instan
     avCodecCtx->bit_rate = 400000; //码率
     avCodecCtx->width = 480; // 视频宽度
     avCodecCtx->height = 360;// 视频高度
-    avCodecCtx->time_base = {1, 25};//时间基 1秒钟25帧
-    avCodecCtx->framerate = {25, 1};//帧率  越大码流越大 越流畅 越清晰
+    avCodecCtx->time_base = (AVRational){1, 25};//时间基 1秒钟25帧
+    avCodecCtx->framerate = (AVRational){25, 1};//帧率  越大码流越大 越流畅 越清晰
     avCodecCtx->gop_size = 10; //多少帧 产生一个关键帧【i】
     avCodecCtx->max_b_frames = 1; //b帧，前后参考帧
     avCodecCtx->pix_fmt = AV_PIX_FMT_YUV420P; //编码的原始数据YUV格式

@@ -33,12 +33,15 @@ public class FFEncodeH264ExampleActivity extends AppCompatActivity implements Vi
             super.handleMessage(msg);
             switch (msg.what) {
                 case CodecHandler.MSG_BEGIN:
+                    Log.i("FFcodecNative", "......开始。。。");
                     progressBar.setVisibility(View.VISIBLE);
                     layoutHandle.setVisibility(View.GONE);
                     break;
                 case CodecHandler.MSG_CONTINUE:
+                    Log.i("FFcodecNative", "");
                     break;
                 case CodecHandler.MSG_END:
+                    Log.i("FFcodecNative", "......结束。。。");
                     progressBar.setVisibility(View.GONE);
                     layoutHandle.setVisibility(View.VISIBLE);
                     break;
@@ -62,10 +65,10 @@ public class FFEncodeH264ExampleActivity extends AppCompatActivity implements Vi
         switch (view.getId()) {
             case R.id.btn_encode:
                 String[] commands = {ResPath.ENCODE_H264_EXAMPLE, "libx264"};
-                if (!FileUtil.checkFileExist(commands[0])) {
+                /*if (!FileUtil.checkFileExist(commands[0])) {
                     Toast.makeText(this, "不存在这个文件！", Toast.LENGTH_LONG).show();
                     return;
-                }
+                }*/
                 codecHandler.executeFFmpegCmd(commands);
                 break;
         }

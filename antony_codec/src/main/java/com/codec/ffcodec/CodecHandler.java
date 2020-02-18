@@ -31,17 +31,17 @@ public class CodecHandler {
         FFcodecNative.execute(commands, new CodecHandleListener() {
             @Override
             public void onBegin() {
-                Log.i(TAG, "handle onBegin...");
+                Log.i("FFcodecNative", "handle onBegin...");
                 mHandler.obtainMessage(MSG_BEGIN, null).sendToTarget();
             }
 
             @Override
             public void onEnd(int result) {
                 if (isContinue) {
-                    Log.i(TAG, "handle onContinue...");
+                    Log.i("FFcodecNative", "handle onContinue... " + result);
                     mHandler.obtainMessage(MSG_CONTINUE, result).sendToTarget();
                 } else {
-                    Log.i(TAG, "handle onEnd...");
+                    Log.i("FFcodecNative", "handle onEnd... " + result);
                     mHandler.obtainMessage(MSG_END, result).sendToTarget();
                 }
             }

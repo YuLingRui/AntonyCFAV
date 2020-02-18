@@ -19,19 +19,19 @@ void MP4Encoder::EncodeStart() {
     avformat_alloc_output_context2(&pFormatCtx, NULL, NULL, this->mp4Path);
     //3.打开待输出的视频文件
     if (avio_open(&pFormatCtx->pb, this->mp4Path, AVIO_FLAG_READ_WRITE) < 0) {
-        LOGE("open output file failed....");
+        LOGE("MP4Encoder","open output file failed....");
         return;
     }
     //4.初始化视频码流
     this->pStream = avformat_new_stream(pFormatCtx, NULL);
     if (pStream == NULL) {
-        LOGE("allocationg output stream failed");
+        LOGE("MP4Encoder","allocationg output stream failed");
         return;
     }
     //5.寻找编码器并打开编码器
     this->pCodec = avcodec_find_encoder(AV_CODEC_ID_MPEG4);
     if (!pCodec) {
-        LOGE("could not find encoder");
+        LOGE("MP4Encoder","could not find encoder");
         return;
     }
     //6.分配编码器并设置参数
@@ -50,7 +50,7 @@ void MP4Encoder::EncodeStart() {
     av_stream_set_r_frame_rate(pStream, {1, 25});
     //7.打开编码器
     if (avcodec_open2(pCodecCtx, pCodec, NULL) < 0) {
-        LOGE("open  encoder fail....");
+        LOGE("MP4Encoder","open  encoder fail....");
         return;
     }
     //输出格式信息

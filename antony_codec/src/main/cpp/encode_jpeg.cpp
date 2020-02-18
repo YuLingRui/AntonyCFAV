@@ -19,19 +19,19 @@ JPEGEncoder::JPEGEncoder(const char *inputPath, int width, int height) {
 
     //3.打开待输出的视频文件
     if (avio_open(&pFormatCtx->pb, jpegPath, AVIO_FLAG_READ_WRITE)) {
-        LOGE("Could not open output file");
+        LOGE("JPEGEncoder","Could not open output file");
         return;
     }
     //4.初始化视频码流
     pStream = avformat_new_stream(pFormatCtx, NULL);
     if (pStream == NULL) {
-        LOGE("Could not allocating output stream");
+        LOGE("JPEGEncoder","Could not allocating output stream");
         return;
     }
     //5.寻找编码器并打开编码器
     pCodec = avcodec_find_encoder(AV_CODEC_ID_MJPEG);
     if (!pCodec) {
-        LOGE("Could not find encoder");
+        LOGE("JPEGEncoder","Could not find encoder");
         return;
     }
 
@@ -54,7 +54,7 @@ JPEGEncoder::JPEGEncoder(const char *inputPath, int width, int height) {
     //7.打开编码器
     int ret = avcodec_open2(pCodecCtx, pCodec, NULL);
     if (ret < 0) {
-        LOGE("Could not open encoder");
+        LOGE("JPEGEncoder","Could not open encoder");
         return;
     }
 
