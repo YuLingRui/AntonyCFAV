@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.codec.R;
 import com.codec.ffcodec.CodecHandler;
+import com.codec.res_path.ResPath;
 
 import static com.codec.res_path.ResPath.ENCODE_H264_EXAMPLE;
 
@@ -60,9 +61,7 @@ public class FFEncodeH264ExampleActivity extends AppCompatActivity implements Vi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_encode:
-                String[] commands = null;
-                commands[0] = ENCODE_H264_EXAMPLE;
-                commands[1] = "libx264";
+                String[] commands = {ResPath.ENCODE_H264_EXAMPLE, "libx264"};
                 if (!FileUtil.checkFileExist(commands[0])) {
                     Toast.makeText(this, "不存在这个文件！", Toast.LENGTH_LONG).show();
                     return;

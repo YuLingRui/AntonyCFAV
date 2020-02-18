@@ -15,10 +15,19 @@
         android:text="@string/naked_data_encdec_ff"/>
 
     <Button
+        android:id="@+id/simulate_data_encode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/simulate_data_encdec_ff"/>
+
+    <Button
         android:id="@+id/multimedia_decdec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="@string/multimedia_decdec_ff"/>
+
+
 
 </LinearLayout>

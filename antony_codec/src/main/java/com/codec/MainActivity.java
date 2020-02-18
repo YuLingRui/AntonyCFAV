@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.codec.ffmpegmedia.CameraV2FFEncodeActivity;
+import com.codec.ffmpegmedia.FFEncodeH264ExampleActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /*权限请求Code*/
@@ -38,8 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             requestPermissions(permissions, PERMISSION_REQUEST_CODE);
         }
         Button naked_data_encode = findViewById(R.id.naked_data_encode);
+        Button simulate_data_encode = findViewById(R.id.simulate_data_encode);
         Button multimedia_decdec = findViewById(R.id.multimedia_decdec);
         naked_data_encode.setOnClickListener(this);
+        simulate_data_encode.setOnClickListener(this);
         multimedia_decdec.setOnClickListener(this);
     }
 
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.naked_data_encode:
                 intent.setClass(MainActivity.this, CameraV2FFEncodeActivity.class);
+                break;
+            case R.id.simulate_data_encode:
+                intent.setClass(MainActivity.this, FFEncodeH264ExampleActivity.class);
                 break;
             case R.id.multimedia_decdec:
                 break;
