@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.codec.ffmpegmedia.CameraV1FFEncodeActivity;
 import com.codec.ffmpegmedia.CameraV2FFEncodeActivity;
 import com.codec.ffmpegmedia.FFDecodeH264ExampleActivity;
 import com.codec.ffmpegmedia.FFEncodeH264ExampleActivity;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.naked_data_encode:
-                intent.setClass(MainActivity.this, CameraV2FFEncodeActivity.class);
+                intent.setClass(MainActivity.this, CameraV1FFEncodeActivity.class);
                 break;
             case R.id.simulate_data_encode:
                 //TODO: 现在不能使用 没有x264库

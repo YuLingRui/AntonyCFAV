@@ -16,22 +16,23 @@ void MP4Encoder::EncodeStart() {
     //1.注册所有组件
     av_register_all();
     //2.初始化输出码流的AVFormatContext
+    LOGI("NativeEncoder", "初始化输出AVFormatContext");
     avformat_alloc_output_context2(&pFormatCtx, NULL, NULL, this->mp4Path);
     //3.打开待输出的视频文件
     if (avio_open(&pFormatCtx->pb, this->mp4Path, AVIO_FLAG_READ_WRITE) < 0) {
-        LOGE("MP4Encoder","open output file failed....");
+        LOGE("NativeEncoder", "open output file failed....");
         return;
     }
     //4.初始化视频码流
     this->pStream = avformat_new_stream(pFormatCtx, NULL);
     if (pStream == NULL) {
-        LOGE("MP4Encoder","allocationg output stream failed");
+        LOGE("NativeEncoder", "allocationg output stream failed");
         return;
     }
     //5.寻找编码器并打开编码器
     this->pCodec = avcodec_find_encoder(AV_CODEC_ID_MPEG4);
     if (!pCodec) {
-        LOGE("MP4Encoder","could not find encoder");
+        LOGE("NativeEncoder", "could not find encoder");
         return;
     }
     //6.分配编码器并设置参数
@@ -50,7 +51,7 @@ void MP4Encoder::EncodeStart() {
     av_stream_set_r_frame_rate(pStream, {1, 25});
     //7.打开编码器
     if (avcodec_open2(pCodecCtx, pCodec, NULL) < 0) {
-        LOGE("MP4Encoder","open  encoder fail....");
+        LOGE("NativeEncoder", "open  encoder fail....");
         return;
     }
     //输出格式信息
@@ -76,13 +77,16 @@ void MP4Encoder::EncodeStart() {
     }
     //9. 写文件头
     avformat_write_header(pFormatCtx, &opt);
+    LOGI("NativeEncoder", "写头文件。。。。");
     //创建已编码帧
     av_new_packet(&avPacket, bufferSize * 3);
+    LOGI("NativeEncoder", "创建一编码帧。。。。");
     //标记正在转换
     this->transform = true;
 }
 
 void MP4Encoder::EncodeBuffer(unsigned char *nv21Buffer) {
+    LOGI("NativeEncoder", "encode buffer....");
     uint8_t *i420_y = pFrameBuffer;
     uint8_t *i420_u = pFrameBuffer + width * height;
     uint8_t *i420_v = pFrameBuffer + width * height * 5 / 4;
@@ -132,19 +136,26 @@ void MP4Encoder::EncodeStop() {
 }
 
 int MP4Encoder::EncodeFrame(AVCodecContext *pCodecCtx, AVFrame *pFrame, AVPacket *pPkt) {
+    LOGI("NativeEncoder", "encode frame....");
     int ret = avcodec_send_frame(pCodecCtx, pFrame);
-    if(ret < 0){
+    LOGI("NativeEncoder", "avcodec sende frame  ret=%d", ret);
+    if (ret < 0) {
         return -1;
     }
-    while (!ret){
-        ret = avcodec_receive_packet(pCodecCtx,pPkt);
+    LOGI("NativeEncoder", "准备循环编码帧。。。")
+    while (!ret) {
+        ret = avcodec_receive_packet(pCodecCtx, pPkt);
+        LOGI("NativeEncoder", "receive packet  ret=%d", ret);
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+            LOGI("NativeEncoder", "ret = AVERROR or AVERROR_EOF");
             return 0;
         } else if (ret < 0) {
             //error during encoding
+            LOGI("NativeEncoder", "ret < 0");
             return -1;
         }
         //printf("Write frame %d, size=%d\n", avPacket->pts, avPacket->size);
+        LOGI("NativeEncoder", "Write frame pts=%d, size=%d", avPacket.pts, avPacket.size);
         pPkt->stream_index = pStream->index;
         av_packet_rescale_ts(pPkt, pCodecCtx->time_base, pStream->time_base);
         pPkt->pos = -1;

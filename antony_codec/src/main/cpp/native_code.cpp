@@ -5,15 +5,16 @@
 #include "native_code.h"
 #include "encode_mp4.h"
 #include "encode_jpeg.h"
+#include "loger.h"
 
 /**
  * 动态注册
 */
 JNINativeMethod methods[] = {
-        {"onPreviewFrame", "([BII)V", (void *) onPreviewFrame},
+        {"onPreviewFrame", "([BII)V",                 (void *) onPreviewFrame},
         {"encodeMP4Start", "(Ljava/lang/String;II)V", (void *) encodeMP4Start},
-        {"encodeMP4Stop", "()V", (void *) encodeMP4Stop},
-        {"encodeJPEG", "(Ljava/lang/String;II)V", (void *) encodeJPEG}
+        {"encodeMP4Stop",  "()V",                     (void *) encodeMP4Stop},
+        {"encodeJPEG",     "(Ljava/lang/String;II)V", (void *) encodeJPEG}
 };
 
 jint registerNativeMethod(JNIEnv *env) {
@@ -50,7 +51,9 @@ void encodeMP4Start(JNIEnv *env, jobject obj, jstring jmp4Path, jint width, jint
     if (videoPublisher == NULL) {
         videoPublisher = new MP4Encoder();
     }
+    LOGI("NativeEncoder", "src=%s  width=%d  height=%d", mp4Path, width, height);
     videoPublisher->InitEncoder(mp4Path, width, height);
+    LOGI("NativeEncoder", "EncodeStart action....");
     videoPublisher->EncodeStart();
     env->ReleaseStringUTFChars(jmp4Path, mp4Path);
 }
@@ -77,7 +80,7 @@ void encodeJPEG(JNIEnv *env, jobject obj, jstring jjpegPath, jint width, jint he
 /*处理相机回调的预览数据*/
 void onPreviewFrame(JNIEnv *env, jobject obj, jbyteArray yuvArray, jint width,
                     jint height) {
-if (NULL != videoPublisher && videoPublisher->isTransform()) {
+    if (NULL != videoPublisher && videoPublisher->isTransform()) {
         jbyte *yuv420Buffer = env->GetByteArrayElements(yuvArray, 0);
         videoPublisher->EncodeBuffer((unsigned char *) yuv420Buffer);
         env->ReleaseByteArrayElements(yuvArray, yuv420Buffer, 0);
