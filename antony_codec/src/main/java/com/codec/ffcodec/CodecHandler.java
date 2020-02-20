@@ -23,12 +23,39 @@ public class CodecHandler {
         this.mHandler = handler;
     }
 
-    public void executeFFmpegCmd(String[] commands) {
+    //编码
+    public void executeFFCmdEncode(String[] commands) {
         if (commands == null) {
             return;
         }
         //子线程中执行 FFmpeg命令行语句
-        FFcodecNative.execute(commands, new CodecHandleListener() {
+        FFcodecNative.executeEncode(commands, new CodecHandleListener() {
+            @Override
+            public void onBegin() {
+                Log.i("FFcodecNative", "handle onBegin...");
+                mHandler.obtainMessage(MSG_BEGIN, null).sendToTarget();
+            }
+
+            @Override
+            public void onEnd(int result) {
+                if (isContinue) {
+                    Log.i("FFcodecNative", "handle onContinue... " + result);
+                    mHandler.obtainMessage(MSG_CONTINUE, result).sendToTarget();
+                } else {
+                    Log.i("FFcodecNative", "handle onEnd... " + result);
+                    mHandler.obtainMessage(MSG_END, result).sendToTarget();
+                }
+            }
+        });
+    }
+
+    //解码
+    public void executeFFCmdDecode(String[] commands) {
+        if (commands == null) {
+            return;
+        }
+        //子线程中执行 FFmpeg命令行语句
+        FFcodecNative.executeDecode(commands, new CodecHandleListener() {
             @Override
             public void onBegin() {
                 Log.i("FFcodecNative", "handle onBegin...");

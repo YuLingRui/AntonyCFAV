@@ -22,4 +22,6 @@ public class ResPath {
     public static final String VIDEO_PATH = PATH + "CFAV_VIDEO" + File.separator;
     //FFmpeg 编码H264 范例
     public static final String ENCODE_H264_EXAMPLE = VIDEO_PATH + "enexample.h264";
+
+    public static final String DECODE_H264_RES = VIDEO_PATH + "cut2.mp4";//要解码的多媒体文件
 }

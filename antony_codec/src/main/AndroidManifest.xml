@@ -28,7 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ffmpegmedia.FFEncodeH264ExampleActivity"></activity>
+        <activity android:name=".ffmpegmedia.FFEncodeH264ExampleActivity" />
+        <activity android:name=".ffmpegmedia.FFDecodeH264ExampleActivity"></activity>
     </application>
 
 </manifest>
