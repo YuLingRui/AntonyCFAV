@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.codec.androidmedia.MediaExtractorActivity;
 import com.codec.ffmpegmedia.CameraV1FFEncodeActivity;
 import com.codec.ffmpegmedia.CameraV2FFEncodeActivity;
 import com.codec.ffmpegmedia.FFDecodeH264ExampleActivity;
@@ -43,9 +44,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button naked_data_encode = findViewById(R.id.naked_data_encode);
         Button simulate_data_encode = findViewById(R.id.simulate_data_encode);
         Button multimedia_decdec = findViewById(R.id.multimedia_decdec);
+        Button extractor_Muxer = findViewById(R.id.android_extractor_Muxer);
         naked_data_encode.setOnClickListener(this);
         simulate_data_encode.setOnClickListener(this);
         multimedia_decdec.setOnClickListener(this);
+        extractor_Muxer.setOnClickListener(this);
     }
 
     @Override
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.naked_data_encode:
+                //TODO: 有bug 无法硬编
                 intent.setClass(MainActivity.this, CameraV1FFEncodeActivity.class);
                 break;
             case R.id.simulate_data_encode:
@@ -60,7 +64,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.setClass(MainActivity.this, FFEncodeH264ExampleActivity.class);
                 break;
             case R.id.multimedia_decdec:
+                //解码H264  生成一些图片
                 intent.setClass(MainActivity.this, FFDecodeH264ExampleActivity.class);
+                break;
+            case R.id.android_extractor_Muxer:
+                //MediaExtractor 拆解MP4多媒体  MediaMuxer生成新的MP4
+                intent.setClass(MainActivity.this, MediaExtractorActivity.class);
                 break;
         }
         startActivity(intent);

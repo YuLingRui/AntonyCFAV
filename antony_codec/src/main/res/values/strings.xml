@@ -3,6 +3,7 @@
     <string name="naked_data_encdec_ff">FF裸数据编码</string>
     <string name="simulate_data_encdec_ff">FF模拟数据编码</string>
     <string name="multimedia_decdec_ff">FF多媒体解码</string>
+    <string name="unpacks_multimedia_files_android">Android拆解多媒体文件</string>
     <string name="ok">OK</string>
     <!-- Preference framework strings. -->
     <string name="cancel">Cancel</string>

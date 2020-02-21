@@ -28,6 +28,11 @@
         android:textSize="16sp"
         android:text="@string/multimedia_decdec_ff"/>
 
-
+    <Button
+        android:id="@+id/android_extractor_Muxer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/unpacks_multimedia_files_android"/>
 
 </LinearLayout>

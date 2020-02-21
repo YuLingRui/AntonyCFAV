@@ -29,7 +29,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ffmpegmedia.FFEncodeH264ExampleActivity" />
-        <activity android:name=".ffmpegmedia.FFDecodeH264ExampleActivity"></activity>
+        <activity android:name=".ffmpegmedia.FFDecodeH264ExampleActivity" />
+        <activity android:name=".androidmedia.MediaExtractorActivity"></activity>
     </application>
 
 </manifest>
