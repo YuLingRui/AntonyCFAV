@@ -31,6 +31,8 @@ void MP4Encoder::EncodeStart() {
     }
     //5.寻找编码器并打开编码器
     this->pCodec = avcodec_find_encoder(AV_CODEC_ID_MPEG4);
+    LOGI("NativeEncoder", "avcodec_find_encoder AV_CODEC_ID_MPEG4");
+    LOGI("NativeEncoder", "pCodec_id= %d", pCodec->id);
     if (!pCodec) {
         LOGE("NativeEncoder", "could not find encoder");
         return;
@@ -146,14 +148,14 @@ int MP4Encoder::EncodeFrame(AVCodecContext *pCodecCtx, AVFrame *pFrame, AVPacket
     while (!ret) {
         ret = avcodec_receive_packet(pCodecCtx, pPkt);
         LOGI("NativeEncoder", "receive packet  ret=%d", ret);
-        if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+        /*if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
             LOGI("NativeEncoder", "ret = AVERROR or AVERROR_EOF");
             return 0;
         } else if (ret < 0) {
             //error during encoding
             LOGI("NativeEncoder", "ret < 0");
             return -1;
-        }
+        }*/
         //printf("Write frame %d, size=%d\n", avPacket->pts, avPacket->size);
         LOGI("NativeEncoder", "Write frame pts=%d, size=%d", avPacket.pts, avPacket.size);
         pPkt->stream_index = pStream->index;

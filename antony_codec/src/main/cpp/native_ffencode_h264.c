@@ -18,13 +18,16 @@ Java_com_codec_ffcodec_FFcodecNative_encode_1example(JNIEnv *env, jobject instan
     const char *codecName = (*env)->GetStringUTFChars(env, codecName_, 0);
     LOGI(TAG, "%s", enPath);
     LOGI(TAG, "%s", codecName);
+    //编码格式；
+    enum AVCodecID codec_id = AV_CODEC_ID_H264;
     AVCodecContext *avCodecCtx;
     const AVCodec *codec;
     AVFrame *frame;
     AVPacket pkt;
     FILE *file;
     avcodec_register_all();
-    codec = avcodec_find_encoder_by_name(codecName);
+    //codec = avcodec_find_encoder_by_name(codecName);
+    codec = avcodec_find_encoder(codec_id);
     if (!codec) {
         LOGE(TAG, "AVCodec  is  null");
         return -1;
