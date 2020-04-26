@@ -13,7 +13,7 @@ public class AnGLSurfaceView extends GLSurfaceView {
     public AnGLSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //AnRender implements GLSurfaceView.Renderer
-        AnRender render = new AnRender();
+        AnRender render = new AnRender(context);
         setRenderer(render);
     }
 }
