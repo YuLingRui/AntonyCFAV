@@ -14,6 +14,8 @@ public class AnGLSurfaceView extends GLSurfaceView {
         super(context, attrs);
         //AnRender implements GLSurfaceView.Renderer
         AnRender render = new AnRender(context);
+        setEGLContextClientVersion(2);//通知默认的EGLContextFactory和EGLConfigChooser选择哪个EGLContext客户端版本。
         setRenderer(render);
+        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 }

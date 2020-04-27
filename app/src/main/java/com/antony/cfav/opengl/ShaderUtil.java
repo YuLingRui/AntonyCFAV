@@ -63,12 +63,10 @@ public class ShaderUtil {
                 GLES20.glDeleteShader(shader);
                 shader = 0;
             }
+            return shader;
         } else {
             return 0;
         }
-        return shader;
-
-
     }
 
     /**

@@ -6,13 +6,10 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
-
 import com.antony.cfav.R;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -29,14 +26,14 @@ public class AnRender implements GLSurfaceView.Renderer {
     };
 
     //纹理坐标系
-    private float[] textureData = {
+    private float[] fragmentData = {
             0f, 1f,
             1f, 1f,
             0f, 0f,
             1f, 0f
     };
     private FloatBuffer vertexBuffer; //顶点buffer
-    private FloatBuffer textureBuffer; //纹理buffer
+    private FloatBuffer fragmentBuffer; //纹理buffer
     private int program; //源程序
     private int vPosition; //顶点位置
     private int fPosition; //纹理位置
@@ -47,24 +44,24 @@ public class AnRender implements GLSurfaceView.Renderer {
         this.mContext = context;
         //为顶点坐标 分配本地内存地址
         //为什么要分配本地内存地址呢？ 因为Opengl取顶点的时候，每一次都到内存中去取值，
-        // 所以这个内存在运行过程中是不允许被java虚拟机GC回收的，我们就要把它搞成本地（底层）不受虚拟机控制的 这种顶点
+        // 所以这个内存在运行过程中是不允许被java虚拟机GC回收的，我们就要把它搞成本地（底层）不受虚拟机控制的这种顶点
         vertexBuffer = ByteBuffer.allocateDirect(vertexData.length * 4) //分配内存大小（分配了32个字节长度）
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()
                 .put(vertexData);
         vertexBuffer.position(0);
 
-        textureBuffer = ByteBuffer.allocateDirect(textureData.length * 4)
+        fragmentBuffer = ByteBuffer.allocateDirect(fragmentData.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()
-                .put(textureData);
-        textureBuffer.position(0);
+                .put(fragmentData);
+        fragmentBuffer.position(0);
     }
 
     private void initRender() {
         String vertexSource = ShaderUtil.getRawResource(mContext, R.raw.vertex_shader);
         String fragmentSource = ShaderUtil.getRawResource(mContext, R.raw.fragment_shader);
-        int program = ShaderUtil.createProgram(vertexSource, fragmentSource); //创建源程序 program
+        program = ShaderUtil.createProgram(vertexSource, fragmentSource); //创建源程序 program
         //7.得到着色器中的属性  todo：我们就从源程序中获取他的属性了
         vPosition = GLES20.glGetAttribLocation(program, "av_Position"); //顶点的向量坐标 todo:一定要跟vertex_shader.glsl中的变量对应上
         fPosition = GLES20.glGetAttribLocation(program, "af_Position"); //纹理的向量坐标
@@ -118,7 +115,7 @@ public class AnRender implements GLSurfaceView.Renderer {
         //11.为顶点属性赋值 todo；就是把 vertexBuffer的数据给到  vPosition
         GLES20.glVertexAttribPointer(vPosition, 2, GLES20.GL_FLOAT, false, 8, vertexBuffer);
         //为片元属性赋值    todo:  把textureBuffer的数据给到 fPosition
-        GLES20.glVertexAttribPointer(fPosition, 2, GLES20.GL_FLOAT, false, 8, textureBuffer);
+        GLES20.glVertexAttribPointer(fPosition, 2, GLES20.GL_FLOAT, false, 8, fragmentBuffer);
         //todo； 到这里 vertex_shader.glsl中的  "av_Position"， "af_Position"就有数据了
         //12.绘制图形
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
