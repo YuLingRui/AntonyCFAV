@@ -6,10 +6,14 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
+import android.util.Log;
+
 import com.antony.cfav.R;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -34,11 +38,13 @@ public class AnRender implements GLSurfaceView.Renderer {
     };
     private FloatBuffer vertexBuffer; //顶点buffer
     private FloatBuffer fragmentBuffer; //纹理buffer
-    private int program; //源程序
+    private int program; //渲染源程序
     private int vPosition; //顶点位置
     private int fPosition; //纹理位置
     private int textureId; //纹理的ID
-    private int sampler;
+    private int sampler; //纹理采样
+    private int vboId;
+    private int vertexlenght = 8;
 
     public AnRender(Context context) {
         this.mContext = context;
@@ -66,6 +72,23 @@ public class AnRender implements GLSurfaceView.Renderer {
         vPosition = GLES20.glGetAttribLocation(program, "av_Position"); //顶点的向量坐标 todo:一定要跟vertex_shader.glsl中的变量对应上
         fPosition = GLES20.glGetAttribLocation(program, "af_Position"); //纹理的向量坐标
         sampler = GLES20.glGetUniformLocation(program, "sTexture"); // sampler2D
+
+        int[] vbos = new int[1];//顶点缓存(GPU开辟一段缓存，将vbos存到显存中)
+        //v1. 创建VBO 【Vertex Buffer Object】
+        GLES20.glGenBuffers(1, vbos, 0);
+        vboId = vbos[0];
+        //v2. 绑定VBO
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vboId);
+        //v3. 分配VBO需要的缓存大小:顶点坐标数据长度 + 纹理坐标数据长度【data=null 表示只分配了空间，并没有放入数据】
+        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, vertexData.length * 4 + fragmentData.length * 4, null, GLES20.GL_STATIC_DRAW);
+        //v4. 为VBO设置坐标点数据的值
+        Log.i("AnRender", "v_length" + vertexData.length * 4);
+        Log.i("AnRender", "f_length" + fragmentData.length * 4);
+        GLES20.glBufferSubData(GLES20.GL_ARRAY_BUFFER, 0, vertexData.length * 4, vertexBuffer); //坐标顶点赋值
+        GLES20.glBufferSubData(GLES20.GL_ARRAY_BUFFER, vertexData.length * 4, fragmentData.length * 4, fragmentBuffer);//纹理顶点赋值
+        //v5. 解绑VBO
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
+        //TODO: 到这里 就把坐标系中的本地内存数据 缓存到了  显存中【GPU中】
 
         //a.创建纹理
         int[] textureIds = new int[1];
@@ -109,17 +132,27 @@ public class AnRender implements GLSurfaceView.Renderer {
         GLES20.glUseProgram(program);
         //9.绑定纹理
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
+
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vboId);//绑定VBO
+
         //10.使顶点属性数组有效,  使纹理属性数组有效
         GLES20.glEnableVertexAttribArray(vPosition);
         GLES20.glEnableVertexAttribArray(fPosition);
-        //11.为顶点属性赋值 todo；就是把 vertexBuffer的数据给到  vPosition
-        GLES20.glVertexAttribPointer(vPosition, 2, GLES20.GL_FLOAT, false, 8, vertexBuffer);
-        //为片元属性赋值    todo:  把textureBuffer的数据给到 fPosition
-        GLES20.glVertexAttribPointer(fPosition, 2, GLES20.GL_FLOAT, false, 8, fragmentBuffer);
+        //11.为顶点坐标属性赋值 todo；就是把 vertexBuffer的数据给到  vPosition
+        //GLES20.glVertexAttribPointer(vPosition, 2, GLES20.GL_FLOAT, false, 8, vertexBuffer);//vPosition中的数据就是本地内存中的数据了
+        //为片元坐标属性赋值    todo:  把textureBuffer的数据给到 fPosition
+        //GLES20.glVertexAttribPointer(fPosition, 2, GLES20.GL_FLOAT, false, 8, fragmentBuffer);//fPosition中的数据就是本地内存中的数据了
         //todo； 到这里 vertex_shader.glsl中的  "av_Position"， "af_Position"就有数据了
+
+        //【11】. 在这一步，我们就可以使用生成好的VBO 【显存中的缓存值了】
+        GLES20.glVertexAttribPointer(vPosition, 2, GLES20.GL_FLOAT, false, 8, 0); //vPosition中的数据就是显存中的数据了
+        GLES20.glVertexAttribPointer(fPosition, 2, GLES20.GL_FLOAT, false, 8, vertexData.length * 4);//fPosition中的数据就是显存中的数据了
+
+
         //12.绘制图形
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
 
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);//这里 textre=0 相当于解绑了
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);//这里 textre=0 解绑纹理
+        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);//这里 buffer=0 解绑VBO
     }
 }
