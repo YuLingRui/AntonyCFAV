@@ -42,11 +42,14 @@ public class AnRender implements GLSurfaceView.Renderer {
     private int fPosition; //纹理位置
     private int textureId; //纹理的ID
     private int sampler; //纹理采样
-    private int vboId;
-    private int fboId;
-    private int imgTextureId;
+    private float uinMatrix; //矩阵
+    private float[] matrix = new float[16]; //正交投影使用
 
-    private FboRender fboRender;
+    private int vboId;// 保存VBO
+    private int fboId;// 保存FBO
+
+    private int imgTextureId; //离屏渲染 图片的纹理ID
+    private FboRender fboRender; //用作离屏渲染 使用
 
 
     public AnRender(Context context) {
@@ -76,7 +79,8 @@ public class AnRender implements GLSurfaceView.Renderer {
         //7.得到着色器中的属性  todo：我们就从源程序中获取他的属性了
         vPosition = GLES20.glGetAttribLocation(program, "av_Position"); //顶点的向量坐标 todo:一定要跟vertex_shader.glsl中的变量对应上
         fPosition = GLES20.glGetAttribLocation(program, "af_Position"); //纹理的向量坐标
-        sampler = GLES20.glGetUniformLocation(program, "sTexture"); // sampler2D
+        sampler = GLES20.glGetUniformLocation(program, "sTexture"); // uniform sampler2D sTexture
+        uinMatrix = GLES20.glGetUniformLocation(program, "u_Matrix"); //uniform vec2 u_Matrix
 
         int[] vbos = new int[1];//顶点缓存(GPU开辟一段缓存，将vbos存到显存中)
         //v1. 创建VBO 【Vertex Buffer Object】
