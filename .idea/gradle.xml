@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/android_codec" />
+            <option value="$PROJECT_DIR$/android_opengl" />
             <option value="$PROJECT_DIR$/antony_codec" />
             <option value="$PROJECT_DIR$/antonycodec" />
             <option value="$PROJECT_DIR$/app" />

@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AntonyCFAV.iml" filepath="$PROJECT_DIR$/AntonyCFAV.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android_codec/android_codec.iml" filepath="$PROJECT_DIR$/android_codec/android_codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android_opengl/android_opengl.iml" filepath="$PROJECT_DIR$/android_opengl/android_opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/antony_codec/antony_codec.iml" filepath="$PROJECT_DIR$/antony_codec/antony_codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/antonycodec/antonycodec.iml" filepath="$PROJECT_DIR$/antonycodec/antonycodec.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
+import android.opengl.Matrix;
 import android.util.Log;
 
 import com.antony.cfav.R;
@@ -30,10 +31,15 @@ public class AnRender implements GLSurfaceView.Renderer {
 
     //纹理坐标系
     private float[] fragmentData = {
-            0f, 0f,
-            1f, 0f,
+//            0f, 0f,
+//            1f, 0f,
+//            0f, 1f,
+//            1f, 1f,
+
             0f, 1f,
             1f, 1f,
+            0f, 0f,
+            1f, 0f
     };
     private FloatBuffer vertexBuffer; //顶点buffer
     private FloatBuffer fragmentBuffer; //纹理buffer
@@ -42,13 +48,13 @@ public class AnRender implements GLSurfaceView.Renderer {
     private int fPosition; //纹理位置
     private int textureId; //纹理的ID
     private int sampler; //纹理采样
-    private float uinMatrix; //矩阵
+    private int uinMatrix; //矩阵
     private float[] matrix = new float[16]; //正交投影使用
 
     private int vboId;// 保存VBO
     private int fboId;// 保存FBO
 
-    private int imgTextureId; //离屏渲染 图片的纹理ID
+    private int imgTextureId; //用作离屏渲染，图片的纹理ID
     private FboRender fboRender; //用作离屏渲染 使用
 
 
@@ -122,7 +128,7 @@ public class AnRender implements GLSurfaceView.Renderer {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
 
-        //f3. 为FBO分配内存大小
+        //f3. 为FBO分配内存大小(1080 1920 是我手机的宽高)
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, 1080, 1920, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
         //f4. 把纹理绑定到FBO上
         GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GLES20.GL_TEXTURE_2D, textureId, 0);
@@ -149,7 +155,6 @@ public class AnRender implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         //TODO: OpenGL es 加载Shader
         initRender();
-
     }
 
     @Override
@@ -157,15 +162,26 @@ public class AnRender implements GLSurfaceView.Renderer {
         GLES20.glViewport(0, 0, width, height);
         Log.e("AnRender", "width: " + width + "     height:" + height);
         fboRender.onChange(width, height);
+        if (width > height) { //横屏
+            // m1. 计算横屏坐标占有比例 (702 , 526 是该图片的高 宽)
+            Matrix.orthoM(matrix, 0, -width / ((height / 702f * 526f)), width / ((height / 702f * 526f)), -1f, 1f, -1f, 1f);
+        } else { //竖屏
+            // m2. 计算竖屏坐标占有比例
+            Matrix.orthoM(matrix, 0, -1, 1, -height / ((width / 526f * 702f)), height / ((width / 526f * 702f)), -1f, 1f);
+        }
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, fboId);//绑定FBO
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);//绑定FBO
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT); //这是清屏
         GLES20.glClearColor(1.0f, 0.0f, 0.0f, 1.0f);//红色清屏
         //8.使用源程序
         GLES20.glUseProgram(program);
+
+        // m3.使用正交投影
+        GLES20.glUniformMatrix4fv(uinMatrix, 1, false, matrix, 0);
+
         //9.绑定纹理
         //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, imgTextureId);
@@ -192,9 +208,9 @@ public class AnRender implements GLSurfaceView.Renderer {
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);//这里 textre=0 解绑纹理
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);//这里 buffer=0 解绑VBO
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);//这里 framebuffer=0 解绑FBO
+        //GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);//这里 framebuffer=0 解绑FBO
 
-        fboRender.onDraw(textureId);
+        //fboRender.onDraw(textureId);
     }
 
 
