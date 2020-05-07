@@ -50,13 +50,13 @@ public class ShaderUtil {
      * @return 0 失败   >0 成功
      */
     public static int loadShader(int shaderType, String source) {
-        //1.创建Shader(着色器：顶点着色器 或  片元着色器)
+        // OpenGL 1.创建Shader(着色器：顶点着色器 或  片元着色器)
         int shader = GLES20.glCreateShader(shaderType);
         if (shader != 0) {
-            //2.加载shader.glsl{这里吧.glsl的文件以String字符串的方式加载}   并编译shader
+            // OpenGL 2.加载shader.glsl{这里吧.glsl的文件以String字符串的方式加载}   并编译shader
             GLES20.glShaderSource(shader, source);
             GLES20.glCompileShader(shader);
-            //3.检查是否编译成功
+            // OpenGL 3.检查是否编译成功
             int[] compiled = new int[1];
             GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compiled, 0);
             if (compiled[0] != GLES20.GL_TRUE) {
@@ -79,17 +79,16 @@ public class ShaderUtil {
         int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertex);
         int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragment);
         if (vertexShader != 0 && fragmentShader != 0) {
-            //4.创建一个渲染程序(源程序program)
+            // OpenGL 4.创建一个渲染程序(源程序program)
             int prgram = GLES20.glCreateProgram();
-            //5.将着色器程序添加到渲染程序中
+            // OpenGL 5.将着色器程序添加到渲染程序中
             GLES20.glAttachShader(prgram, vertexShader);
             GLES20.glAttachShader(prgram, fragmentShader);
-            //6.链接源程序
+            // OpenGL 6.链接源程序
             GLES20.glLinkProgram(prgram);
             return prgram;
         } else {
             return 0;
         }
     }
-
 }

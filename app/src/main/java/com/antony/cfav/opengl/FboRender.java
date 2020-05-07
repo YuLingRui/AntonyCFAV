@@ -57,7 +57,7 @@ public class FboRender {
 
     }
 
-    public void onCreate() {
+    public void onFboCreate() {
         String vertexSource = ShaderUtil.getRawResource(context, R.raw.vertex_shader);
         String fragmentSource = ShaderUtil.getRawResource(context, R.raw.fragment_shader);
 
@@ -78,28 +78,24 @@ public class FboRender {
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
     }
 
-    public void onChange(int width, int height) {
+    public void onFboChange(int width, int height) {
         GLES20.glViewport(0, 0, width, height);
     }
 
-    public void onDraw(int textureId) {
+    public void onFboDraw(int textureId) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        GLES20.glClearColor(1f, 0f, 0f, 1f);
+        GLES20.glClearColor(0f, 1f, 0f, 1f);
 
         GLES20.glUseProgram(program);
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
-
-
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vboId);
 
         GLES20.glEnableVertexAttribArray(vPosition);
-        GLES20.glVertexAttribPointer(vPosition, 2, GLES20.GL_FLOAT, false, 8,
-                0);
+        GLES20.glVertexAttribPointer(vPosition, 2, GLES20.GL_FLOAT, false, 8, 0);
 
         GLES20.glEnableVertexAttribArray(fPosition);
-        GLES20.glVertexAttribPointer(fPosition, 2, GLES20.GL_FLOAT, false, 8,
-                vertexData.length * 4);
+        GLES20.glVertexAttribPointer(fPosition, 2, GLES20.GL_FLOAT, false, 8, vertexData.length * 4);
 
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
 
