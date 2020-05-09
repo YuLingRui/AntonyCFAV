@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/codec" />
             <option value="$PROJECT_DIR$/ffmpeg-single" />
             <option value="$PROJECT_DIR$/libyuv-single" />
+            <option value="$PROJECT_DIR$/myopengl" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
