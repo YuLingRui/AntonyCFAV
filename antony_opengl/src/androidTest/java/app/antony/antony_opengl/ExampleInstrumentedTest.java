@@ -1,4 +1,4 @@
-package app.antony.myopengl;
+package app.antony.antony_opengl;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("app.antony.myopengl", appContext.getPackageName());
+        assertEquals("app.antony.antony_opengl", appContext.getPackageName());
     }
 }

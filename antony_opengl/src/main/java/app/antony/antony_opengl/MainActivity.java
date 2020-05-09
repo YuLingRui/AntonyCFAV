@@ -1,4 +1,4 @@
-package app.antony.myopengl;
+package app.antony.antony_opengl;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.antony.myopengl">
+    package="app.antony.antony_opengl">
 
     <application
         android:allowBackup="true"
