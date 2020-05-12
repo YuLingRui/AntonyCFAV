@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/android_opengl" />
             <option value="$PROJECT_DIR$/antony_codec" />
+            <option value="$PROJECT_DIR$/antony_mianshi" />
             <option value="$PROJECT_DIR$/antony_opengl" />
             <option value="$PROJECT_DIR$/antonycodec" />
             <option value="$PROJECT_DIR$/app" />
@@ -20,6 +21,7 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
