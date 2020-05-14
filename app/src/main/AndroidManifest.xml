@@ -20,12 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.camera.CameraActivity" />
         <activity android:name=".activity.audio.AudioHandleActivity" />
         <activity android:name=".activity.video.VideoHandleActivity" />
-        <activity android:name=".activity.opengl.OpenGlDemoActivity">
+        <activity android:name=".activity.opengl.OpenGlDemoActivity"></activity>
+        <activity android:name=".activity.opengl.CameraOpenGlPreviewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
