@@ -9,23 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="fragment.FragmentMSActivity"></activity>
-
-        <service
-            android:name="service.ServiceMianShi"
-            android:enabled="true"
-            android:exported="true" />
-
-        <activity android:name=".MainActivity">
+        <activity android:name="handler.HandlerMianShiActivity"></activity>
+        <activity android:name="fragment.FragmentMSActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="service.ServiceMianShi"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name="activity.ActivityMianShi"
-            android:configChanges="screenLayout" />
+            android:configChanges="screenLayout"></activity>
+        <activity android:name="handler.HandlerMianShi2" />
     </application>
 
 </manifest>

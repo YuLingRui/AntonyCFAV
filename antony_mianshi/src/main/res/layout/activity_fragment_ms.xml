@@ -17,6 +17,14 @@
         android:layout_height="wrap_content"
         android:text="碎片1" />
 
+
+    <Button
+        android:id="@+id/fragment_3_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="碎片3" />
+
     <Button
         android:id="@+id/fragment_2_btn"
         android:layout_width="match_parent"
