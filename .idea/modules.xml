@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AntonyCFAV.iml" filepath="$PROJECT_DIR$/AntonyCFAV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AntonyCFAV.iml" filepath="$PROJECT_DIR$/AntonyCFAV.iml" />
       <module fileurl="file://$PROJECT_DIR$/android_opengl/AntonyCFAV-android_opengl.iml" filepath="$PROJECT_DIR$/android_opengl/AntonyCFAV-android_opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/antony_codec/AntonyCFAV-antony_codec.iml" filepath="$PROJECT_DIR$/antony_codec/AntonyCFAV-antony_codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/antony_opengl/AntonyCFAV-antony_opengl.iml" filepath="$PROJECT_DIR$/antony_opengl/AntonyCFAV-antony_opengl.iml" />
@@ -19,14 +20,24 @@
       <module fileurl="file://$PROJECT_DIR$/ffmpeg-single/AntonyLearn-AntonyCFAV-ffmpeg-single.iml" filepath="$PROJECT_DIR$/ffmpeg-single/AntonyLearn-AntonyCFAV-ffmpeg-single.iml" />
       <module fileurl="file://$PROJECT_DIR$/myopengl/AntonyLearn-AntonyCFAV-myopengl.iml" filepath="$PROJECT_DIR$/myopengl/AntonyLearn-AntonyCFAV-myopengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/android_opengl/android_opengl.iml" filepath="$PROJECT_DIR$/android_opengl/android_opengl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android_opengl/android_opengl.iml" filepath="$PROJECT_DIR$/android_opengl/android_opengl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antony_codec/antony_codec.iml" filepath="$PROJECT_DIR$/antony_codec/antony_codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/antony_codec/antony_codec.iml" filepath="$PROJECT_DIR$/antony_codec/antony_codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/antony_mianshi/antony_mianshi.iml" filepath="$PROJECT_DIR$/antony_mianshi/antony_mianshi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antony_mianshi/antony_mianshi.iml" filepath="$PROJECT_DIR$/antony_mianshi/antony_mianshi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antony_opengl/antony_opengl.iml" filepath="$PROJECT_DIR$/antony_opengl/antony_opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/antony_opengl/antony_opengl.iml" filepath="$PROJECT_DIR$/antony_opengl/antony_opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/antonycodec/antonycodec.iml" filepath="$PROJECT_DIR$/antonycodec/antonycodec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/antonycodec/antonycodec.iml" filepath="$PROJECT_DIR$/antonycodec/antonycodec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/codec/codec.iml" filepath="$PROJECT_DIR$/codec/codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codec/codec.iml" filepath="$PROJECT_DIR$/codec/codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" filepath="$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" />
       <module fileurl="file://$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" filepath="$PROJECT_DIR$/ffmpeg-single/ffmpeg-single.iml" />
       <module fileurl="file://$PROJECT_DIR$/libyuv-single/libyuv-single.iml" filepath="$PROJECT_DIR$/libyuv-single/libyuv-single.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libyuv-single/libyuv-single.iml" filepath="$PROJECT_DIR$/libyuv-single/libyuv-single.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myopengl/myopengl.iml" filepath="$PROJECT_DIR$/myopengl/myopengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/myopengl/myopengl.iml" filepath="$PROJECT_DIR$/myopengl/myopengl.iml" />
     </modules>
   </component>

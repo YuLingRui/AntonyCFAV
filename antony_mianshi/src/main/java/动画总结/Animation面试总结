@@ -1,0 +1,29 @@
+
+TODO: 帧动画【Frame Animation】
+帧动画的使用如下：
+（1）在drawable中定义 frame_animation.xml
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/a_0"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/a_1"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/a_2"
+        android:duration="100" />
+</animation-list>
+（2）在页面中使用
+protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_frame_animation);
+
+        ImageView imageView = (ImageView) findViewById(R.id.animation1);
+        imageView.setImageResource(R.drawable.frame_animation);
+
+        AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
+        animationDrawable.start();
+    }
+可以说，图片资源决定了这种方式可以实现怎样的动画
+在有些代码中，我们还会看到android：oneshot="false" ，这个oneshot 的含义就是动画执行一次（true）还是循环执行多次。

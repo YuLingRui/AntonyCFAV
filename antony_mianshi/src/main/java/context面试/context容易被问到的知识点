@@ -1,0 +1,17 @@
+
+
+
+TODO: getApplication() 和 getApplicationContext() 区别
+相同点：他们都是获取 Application对象的【getContext.jpg图片】
+
+不同点：实际上这两个方法在作用域上有比较大的区别
+（1）getApplication()方法的语义性非常强，一看就知道是用来获取Application实例的，
+但是这个方法只有在Activity和Service中才能调用的到。
+
+（2）如果在一些其它的场景，比如BroadcastReceiver中也想获得Application的实例，这时就可以借助getApplicationContext()方法了。
+public class MyReceiver extends BroadcastReceiver{
+  @Override
+  public void onReceive(Contextcontext,Intentintent){
+    Application myApp= (Application)context.getApplicationContext();
+  }
+}
